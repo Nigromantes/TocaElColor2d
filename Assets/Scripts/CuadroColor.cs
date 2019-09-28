@@ -10,7 +10,10 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
 	
     public enum Color {Azul,Rojo,Amarillo};
 
-
+    //internal void AjustarColor(int v)
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     public Sprite sprite_Azul;
     public Sprite sprite_Rojo;
@@ -20,16 +23,19 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     private int codigoColor;
     
     // Use this for initialization
-	void Start () {
-        codigoColor = UnityEngine.Random.Range(1, 4);
-        spriteRender = GetComponent<SpriteRenderer>();        
-        AjusteColor(codigoColor);
-       
+	void Awake() {
+
+        spriteRender = GetComponent<SpriteRenderer>();
+        //codigoColor = UnityEngine.Random.Range(1, 4);
+        codigoColor = 1; 
+        
+       AjusteColor(codigoColor);
+
 
 
     }
 
-    private void AjusteColor(int codigoColor)
+    public void AjusteColor(int codigoColor)
     {
         switch (codigoColor)
         {

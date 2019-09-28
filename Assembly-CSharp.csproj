@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\CuadroColor.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
  <Reference Include="UnityEditor.StandardEvents">
  <HintPath>D:/Usuario/Documents/Sin Respaldo/Unity/TocaElColor2d/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
