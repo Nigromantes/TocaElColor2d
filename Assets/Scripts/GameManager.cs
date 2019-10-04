@@ -102,36 +102,13 @@ public class GameManager : MonoBehaviour {
     private int AsignacionColor(int i,  int codigoDeColor, int cantidadColores)
     {
         cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(codigoDeColor);
+        cuadroColor[i].GetComponent<CuadroColor>().codigoColor = codigoDeColor;
+
         cantidadColores--;
         return cantidadColores;
     }
 
-    //private void SwittchColores(int i, int codigoColor, int azules, int rojos, int amarillos)
-    //{
-    //    switch (codigoColor)
-    //    {
-    //        //case 1: cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(codigoColor);
-    //        //    azules++;
-    //        //    break;
-    //        case 1:
-    //            AsignacionDecolor(i, codigoColor, azules);
-    //            break;
-    //        case 2:
-    //            AsignacionDecolor(i, codigoColor, rojos);
-    //            break;
-    //        case 3:
-    //            AsignacionDecolor(i, codigoColor, amarillos);
-    //            break;
-
-    //    }
-    //}
-
-    //void AsignacionDecolor(int i, int codigoColor, int color )
-    //{
-    //    cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(codigoColor);
-    //    color++;
-
-    //}
+  
 
 
 

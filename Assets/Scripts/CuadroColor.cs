@@ -10,10 +10,7 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
 	
     public enum Color {Azul,Rojo,Amarillo};
 
-    //internal void AjustarColor(int v)
-    //{
-    //    throw new NotImplementedException();
-    //}
+ 
 
     public Sprite sprite_Blanco;
     public Sprite sprite_Azul;
@@ -21,7 +18,7 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     public Sprite sprite_Amarillo;
 
     private SpriteRenderer spriteRender;
-    private int codigoColor = 0;
+    public int codigoColor = 0;
     
     // Use this for initialization
 	void Awake() {
@@ -49,24 +46,32 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     }
 
     // Update is called once per frame
-    void Update () {
+ //   void Update () {
 		
-	}
+	//}
 
 
     public void OnPointerDown(PointerEventData eventData)
     {
-       // Debug.Log("Se ejecuta el cambio de color");
+        // Debug.Log("Se ejecuta el cambio de color");
 
+        RotacionColor();
+
+    }
+
+    private void RotacionColor()
+    {
         if (codigoColor < 3)
         {
             codigoColor++;
+            AjusteColor(codigoColor);
         }
         else
         {
             codigoColor = 1;
+            AjusteColor(codigoColor);
         }
-        
-        AjusteColor(codigoColor);
+
+
     }
 }
