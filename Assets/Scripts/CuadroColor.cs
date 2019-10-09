@@ -18,16 +18,40 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     public Sprite sprite_Amarillo;
 
     private SpriteRenderer spriteRender;
-    public int codigoColor = 0;
-    
+    private int codigoColor = 0;
+
+    public int CodigoColor
+    {
+        get
+        {
+            return codigoColor;
+        }
+
+        set
+        {
+            if (value > 3)
+            {
+                value = 3;
+            }
+            else if (value <1)
+            {
+                value = 1;
+            }
+            
+            codigoColor = value;
+
+            //codigoColor = value;
+        }
+    }
+
     // Use this for initialization
-	void Awake() {
+    void Awake() {
 
         spriteRender = GetComponent<SpriteRenderer>();
         //codigoColor = UnityEngine.Random.Range(1, 4);
         //codigoColor = 1; 
         
-       AjusteColor(codigoColor);
+       AjusteColor(CodigoColor);
 
 
 
@@ -61,15 +85,15 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
 
     private void RotacionColor()
     {
-        if (codigoColor < 3)
+        if (CodigoColor < 3)
         {
-            codigoColor++;
-            AjusteColor(codigoColor);
+            CodigoColor++;
+            AjusteColor(CodigoColor);
         }
         else
         {
-            codigoColor = 1;
-            AjusteColor(codigoColor);
+            CodigoColor = 1;
+            AjusteColor(CodigoColor);
         }
 
 

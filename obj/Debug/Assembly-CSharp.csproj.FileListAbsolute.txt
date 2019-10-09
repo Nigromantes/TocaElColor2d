@@ -1,0 +1,2 @@
+D:\Usuario\Documents\Sin Respaldo\Unity\TocaElColor2d\obj\Debug\Assembly-CSharp.csprojAssemblyReference.cache
+D:\Usuario\Documents\Sin Respaldo\Unity\TocaElColor2d\obj\Debug\Assembly-CSharp.csproj.CoreCompileInputs.cache

@@ -10,25 +10,117 @@ public class GameManager : MonoBehaviour {
     public CuadroColor[] cuadroColor;
     private int codigoColor;
 
+     int maximoDeCuadros;
+
     
     int azules; 
     int rojos;
     int amarillos;
-    int maximoDeCuadros;
+   
 
     int codigoColorAzul = 1;
     int codigoColorRojo = 2;
     int codigoColorAmarillo = 3;
 
+    public int CodigoColorAzul
+    {
+        get
+        {
+            return codigoColorAzul;
+        }
+
+        set
+        {
+            codigoColorAzul = value;
+        }
+    }
+
+    public int CodigoColorRojo
+    {
+        get
+        {
+            return codigoColorRojo;
+        }
+
+        set
+        {
+            codigoColorRojo = value;
+        }
+    }
+
+    public int CodigoColorAmarillo
+    {
+        get
+        {
+            return codigoColorAmarillo;
+        }
+
+        set
+        {
+            codigoColorAmarillo = value;
+        }
+    }
+
+    public int Azules
+    {
+        get
+        {
+            return azules;
+        }
+
+        set
+        {
+            azules = value;
+        }
+    }
+
+    public int MaximoDeCuadros
+    {
+        get
+        {
+            return maximoDeCuadros;
+        }
+
+        set
+        {
+            maximoDeCuadros = value;
+        }
+    }
+
+    public int Rojos
+    {
+        get
+        {
+            return rojos;
+        }
+
+        set
+        {
+            rojos = value;
+        }
+    }
+
+    public int Amarillos
+    {
+        get
+        {
+            return amarillos;
+        }
+
+        set
+        {
+            amarillos = value;
+        }
+    }
 
     void Awake()
     {
 
-        maximoDeCuadros = cuadroColor.Length/3;
+        maximoDeCuadros = cuadroColor.Length / 3;
 
-         azules = maximoDeCuadros;
-         rojos = maximoDeCuadros;
-         amarillos = maximoDeCuadros;
+        azules = maximoDeCuadros;
+        rojos = maximoDeCuadros;
+        amarillos = maximoDeCuadros;
 
 
     }
@@ -37,9 +129,13 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-
         //cuadroColor.GetComponent<CuadroColor>().AjusteColor(2);
 
+        AsignarColoresAlInicio();
+    }
+
+    private void AsignarColoresAlInicio()
+    {
         for (int i = 0; i < cuadroColor.Length; i++)
         {
 
@@ -48,48 +144,48 @@ public class GameManager : MonoBehaviour {
             switch (codigoColor)
             {
                 case 1:
-                    if (azules > 0)
+                    if (Azules > 0)
                     {
-                       azules = AsignacionColor(i,codigoColorAzul,azules);
+                        Azules = AsignacionColor(i, CodigoColorAzul, Azules);
                     }
-                    else if (rojos > 0)
+                    else if (Rojos > 0)
                     {
-                        rojos = AsignacionColor(i, codigoColorRojo, rojos);
+                        Rojos = AsignacionColor(i, CodigoColorRojo, Rojos);
                     }
-                    else if (amarillos > 0)
+                    else if (Amarillos > 0)
                     {
 
-                        amarillos = AsignacionColor(i,codigoColorAmarillo,amarillos);
+                        Amarillos = AsignacionColor(i, CodigoColorAmarillo, Amarillos);
                     }
 
                     break;
                 case 2:
-                    if (rojos > 0)
+                    if (Rojos > 0)
                     {
-                        rojos = AsignacionColor(i, codigoColorRojo, rojos);
+                        Rojos = AsignacionColor(i, CodigoColorRojo, Rojos);
                     }
-                    else if (amarillos > 0)
+                    else if (Amarillos > 0)
                     {
-                        amarillos = AsignacionColor(i,codigoColorAmarillo,amarillos);
+                        Amarillos = AsignacionColor(i, CodigoColorAmarillo, Amarillos);
                     }
-                    else if (azules > 0)
+                    else if (Azules > 0)
                     {
-                        azules = AsignacionColor(i,codigoColorAzul,azules);
+                        Azules = AsignacionColor(i, CodigoColorAzul, Azules);
                     }
 
                     break;
                 case 3:
-                    if (amarillos > 0)
+                    if (Amarillos > 0)
                     {
-                         amarillos = AsignacionColor(i,codigoColorAmarillo,amarillos);
+                        Amarillos = AsignacionColor(i, CodigoColorAmarillo, Amarillos);
                     }
-                    else if (azules > 0)
+                    else if (Azules > 0)
                     {
-                        azules = AsignacionColor(i,codigoColorAzul,azules);
+                        Azules = AsignacionColor(i, CodigoColorAzul, Azules);
                     }
-                    else if (rojos > 0)
+                    else if (Rojos > 0)
                     {
-                        rojos = AsignacionColor(i, codigoColorRojo, rojos);
+                        Rojos = AsignacionColor(i, CodigoColorRojo, Rojos);
                     }
 
                     break;
@@ -102,15 +198,48 @@ public class GameManager : MonoBehaviour {
     private int AsignacionColor(int i,  int codigoDeColor, int cantidadColores)
     {
         cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(codigoDeColor);
-        cuadroColor[i].GetComponent<CuadroColor>().codigoColor = codigoDeColor;
+        cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = codigoDeColor;
 
         cantidadColores--;
         return cantidadColores;
     }
 
-  
 
 
+    public void AjusteDeCololorAlosCuadrados(int codigoColorDeCambio)
+    {
+        for (int i = 0; i < cuadroColor.Length; i++)
+        {
+
+            int numeroDeCuadrosQueCambian = 1;
+            if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorDeCambio+1))
+            {
+
+            }
+
+
+            switch (codigoColorDeCambio)
+            {
+                case 1:
+                    int CuadroACambiarElejgido;
+                    CuadroACambiarElejgido = UnityEngine.Random.Range(1, maximoDeCuadros);
+                    //if ( cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = codigoColorDeCambio)
+                    //{
+
+                    //}
+
+                   
+
+
+                    break;
+            }
+
+
+        }
+
+
+
+    }
 
 
 
