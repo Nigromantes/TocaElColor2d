@@ -80,7 +80,16 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
         // Debug.Log("Se ejecuta el cambio de color");
 
         RotacionColor();
+        CambioDecolordeotroscuadrados();
 
+    }
+
+    private void CambioDecolordeotroscuadrados()
+    {
+        int codigoColorACamibiar1 = AjusteCodigoColor1(codigoColor);
+        int codigoColorACamibiar2 = AjusteCodigoColor2(codigoColor);
+       
+        GameManager.instance.AjusteDeCololorAlosCuadradosDesdeMangaer(codigoColorACamibiar1,codigoColorACamibiar2);
     }
 
     private void RotacionColor()
@@ -88,14 +97,38 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
         if (CodigoColor < 3)
         {
             CodigoColor++;
-            AjusteColor(CodigoColor);
+            
         }
         else
         {
             CodigoColor = 1;
-            AjusteColor(CodigoColor);
+            
         }
+        AjusteColor(CodigoColor);
+
+    }
+
+    int AjusteCodigoColor1(int codigoColor)
+    {
+        codigoColor++;
+        if (codigoColor == 4)
+        {
+            codigoColor = 1;
+        }
+        return codigoColor;
 
 
     }
+    int AjusteCodigoColor2(int codigoColor)
+    {
+        codigoColor=+2;
+        if (codigoColor > 3)
+        {
+            codigoColor = 1;
+        }
+        return codigoColor;
+
+
+    }
+
 }

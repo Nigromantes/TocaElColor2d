@@ -10,13 +10,13 @@ public class GameManager : MonoBehaviour {
     public CuadroColor[] cuadroColor;
     private int codigoColor;
 
-     int maximoDeCuadros;
+    int maximoDeCuadros;
 
-    
-    int azules; 
+
+    int azules;
     int rojos;
     int amarillos;
-   
+
 
     int codigoColorAzul = 1;
     int codigoColorRojo = 2;
@@ -113,6 +113,11 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+
+    public int numeroDeCuadrosQueCambian1;
+    public int numeroDeCuadrosQueCambian2;
+
+    public static GameManager instance;
     void Awake()
     {
 
@@ -122,6 +127,21 @@ public class GameManager : MonoBehaviour {
         rojos = maximoDeCuadros;
         amarillos = maximoDeCuadros;
 
+        //numeroDeCuadrosQueCambian = maximoDeCuadros/4
+        numeroDeCuadrosQueCambian1 = 1;
+        numeroDeCuadrosQueCambian2 = 1;
+
+        if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+
 
     }
 
@@ -129,7 +149,7 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        //cuadroColor.GetComponent<CuadroColor>().AjusteColor(2);
+
 
         AsignarColoresAlInicio();
     }
@@ -195,7 +215,7 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private int AsignacionColor(int i,  int codigoDeColor, int cantidadColores)
+    private int AsignacionColor(int i, int codigoDeColor, int cantidadColores)
     {
         cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(codigoDeColor);
         cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = codigoDeColor;
@@ -206,42 +226,56 @@ public class GameManager : MonoBehaviour {
 
 
 
-    public void AjusteDeCololorAlosCuadrados(int codigoColorDeCambio)
+    public void AjusteDeCololorAlosCuadradosDesdeMangaer(int codigoColorACambiar1,int codigoColorAcambiar2)
     {
+
+
         for (int i = 0; i < cuadroColor.Length; i++)
         {
-
-            int numeroDeCuadrosQueCambian = 1;
-            if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorDeCambio+1))
+            
+            if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorACambiar1))
             {
+                int portecentajeDeCambio = Random.Range(1, 101);
+                //Debug.Log(portecentajeDeCambio);
+                if (numeroDeCuadrosQueCambian1 > 0 && portecentajeDeCambio > 50)
+                {
 
+                    int cambiodColor = AjusteCodigoColorACambiar(codigoColorACambiar1);
+                    
+
+                    //cuadroColor[i].AjusteColor(codigoColor);
+                    cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(cambiodColor);
+                     cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = cambiodColor;
+                    numeroDeCuadrosQueCambian1--;
+                }
             }
 
-
-            switch (codigoColorDeCambio)
+            if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorAcambiar2))
             {
-                case 1:
-                    int CuadroACambiarElejgido;
-                    CuadroACambiarElejgido = UnityEngine.Random.Range(1, maximoDeCuadros);
-                    //if ( cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = codigoColorDeCambio)
-                    //{
+                int portecentajeDeCambio = Random.Range(1, 101);
+                //Debug.Log(portecentajeDeCambio);
+                if (numeroDeCuadrosQueCambian2 > 0 && portecentajeDeCambio > 50)
+                {
 
-                    //}
-
-                   
+                    int cambiodColor = AjusteCodigoColorACambiar(codigoColorAcambiar2);
 
 
-                    break;
+                    //cuadroColor[i].AjusteColor(codigoColor);
+                    cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(cambiodColor);
+                    cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = cambiodColor;
+                    numeroDeCuadrosQueCambian2--;
+                }
             }
+
 
 
         }
 
-
+        //Ajustar para quede automático este ajuste. 
+        numeroDeCuadrosQueCambian1 = 1;
+        numeroDeCuadrosQueCambian2 = 1;
 
     }
-
-
 
 
     // Update is called once per frame
@@ -251,5 +285,17 @@ public class GameManager : MonoBehaviour {
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+    }
+
+    int AjusteCodigoColorACambiar(int codigoColor)
+    {
+        codigoColor++;
+        if (codigoColor == 4)
+        {
+            codigoColor = 1;
+        }
+        return codigoColor;
+
+
     }
 }
