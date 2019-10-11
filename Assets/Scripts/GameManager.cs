@@ -241,13 +241,10 @@ public class GameManager : MonoBehaviour {
                 {
 
                     int cambiodColor = AjusteCodigoColorACambiar(codigoColorACambiar1);
-                    
 
-                    //cuadroColor[i].AjusteColor(codigoColor);
-                    cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(cambiodColor);
-                     cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = cambiodColor;
-                    numeroDeCuadrosQueCambian1--;
+                   numeroDeCuadrosQueCambian1 = CambioColor(i, cambiodColor,numeroDeCuadrosQueCambian1);
                 }
+                Debug.Log("Se ejecutó el cambio de color 1");
             }
 
             if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorAcambiar2))
@@ -259,15 +256,14 @@ public class GameManager : MonoBehaviour {
 
                     int cambiodColor = AjusteCodigoColorACambiar(codigoColorAcambiar2);
 
+                    numeroDeCuadrosQueCambian2 = CambioColor(i, cambiodColor,numeroDeCuadrosQueCambian2);
 
-                    //cuadroColor[i].AjusteColor(codigoColor);
-                    cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(cambiodColor);
-                    cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = cambiodColor;
-                    numeroDeCuadrosQueCambian2--;
+                   
                 }
+
             }
 
-
+          
 
         }
 
@@ -275,6 +271,15 @@ public class GameManager : MonoBehaviour {
         numeroDeCuadrosQueCambian1 = 1;
         numeroDeCuadrosQueCambian2 = 1;
 
+    }
+
+    private int CambioColor(int i, int cambiodColor, int numeroDeCuadrosQueCambian)
+    {
+        //cuadroColor[i].AjusteColor(codigoColor);
+        cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(cambiodColor);
+        cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = cambiodColor;
+        numeroDeCuadrosQueCambian--;
+        return numeroDeCuadrosQueCambian;
     }
 
 
