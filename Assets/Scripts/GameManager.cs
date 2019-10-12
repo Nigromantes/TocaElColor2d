@@ -114,8 +114,13 @@ public class GameManager : MonoBehaviour {
     }
 
 
-    public int numeroDeCuadrosQueCambian1;
-    public int numeroDeCuadrosQueCambian2;
+    public int numeroDeCuadrosQueCambian1Totales;
+    public int numeroDeCuadrosQueCambian2Totales;
+    public int numeroDeCuadrosQueCambian3Totales;
+
+    int  numeroDeCuadrosQueCambian1;
+    int  numeroDeCuadrosQueCambian2;
+    int  numeroDeCuadrosQueCambian3;
 
     public static GameManager instance;
     void Awake()
@@ -127,9 +132,10 @@ public class GameManager : MonoBehaviour {
         rojos = maximoDeCuadros;
         amarillos = maximoDeCuadros;
 
-        //numeroDeCuadrosQueCambian = maximoDeCuadros/4
-        numeroDeCuadrosQueCambian1 = 1;
-        numeroDeCuadrosQueCambian2 = 1;
+        //numeroDeCuadrosQueCambian = maximoDeCuadros / 4
+        numeroDeCuadrosQueCambian1 = numeroDeCuadrosQueCambian1Totales;
+        numeroDeCuadrosQueCambian2 = numeroDeCuadrosQueCambian2Totales;
+        numeroDeCuadrosQueCambian3 = numeroDeCuadrosQueCambian3Totales;
 
         if (instance != null)
         {
@@ -226,56 +232,52 @@ public class GameManager : MonoBehaviour {
 
 
 
-    public void AjusteDeCololorAlosCuadradosDesdeMangaer(int codigoColorACambiar1,int codigoColorAcambiar2)
+    public void AjusteDeCololorAlosCuadradosDesdeMangaer(int codigoColorACambiar1, int codigoColorACambiar2, int codigoColorACambiar3)
     {
 
 
         for (int i = 0; i < cuadroColor.Length; i++)
         {
-            
-            if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorACambiar1))
-            {
-                int portecentajeDeCambio = Random.Range(1, 101);
-                //Debug.Log(portecentajeDeCambio);
-                if (numeroDeCuadrosQueCambian1 > 0 && portecentajeDeCambio > 50)
-                {
 
-                    int cambiodColor = AjusteCodigoColorACambiar(codigoColorACambiar1);
 
-                   numeroDeCuadrosQueCambian1 = CambioColor(i, cambiodColor,numeroDeCuadrosQueCambian1);
-                }
-                Debug.Log("Se ejecutó el cambio de color 1");
-            }
+            numeroDeCuadrosQueCambian1 = CambiodeColorPorElmanager(codigoColorACambiar1, i, numeroDeCuadrosQueCambian1);
 
-            if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorAcambiar2))
-            {
-                int portecentajeDeCambio = Random.Range(1, 101);
-                //Debug.Log(portecentajeDeCambio);
-                if (numeroDeCuadrosQueCambian2 > 0 && portecentajeDeCambio > 50)
-                {
+            numeroDeCuadrosQueCambian2 = CambiodeColorPorElmanager(codigoColorACambiar2, i, numeroDeCuadrosQueCambian2);
 
-                    int cambiodColor = AjusteCodigoColorACambiar(codigoColorAcambiar2);
-
-                    numeroDeCuadrosQueCambian2 = CambioColor(i, cambiodColor,numeroDeCuadrosQueCambian2);
-
-                   
-                }
-
-            }
-
-          
+            numeroDeCuadrosQueCambian3 = CambiodeColorPorElmanager(codigoColorACambiar3, i, numeroDeCuadrosQueCambian3);
 
         }
-
         //Ajustar para quede automático este ajuste. 
-        numeroDeCuadrosQueCambian1 = 1;
-        numeroDeCuadrosQueCambian2 = 1;
+        numeroDeCuadrosQueCambian1 = numeroDeCuadrosQueCambian1Totales;
+        numeroDeCuadrosQueCambian2 = numeroDeCuadrosQueCambian2Totales;
+        numeroDeCuadrosQueCambian3 = numeroDeCuadrosQueCambian3Totales;
 
+
+    }
+
+  
+    private int CambiodeColorPorElmanager(int codigoColorACambiar, int i, int numeroDeCuadrosQueCambian)
+    {
+        if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorACambiar))
+        {
+            
+            int portecentajeDeCambio = Random.Range(1, 101);
+            //Debug.Log(portecentajeDeCambio);
+            if (numeroDeCuadrosQueCambian > 0 && portecentajeDeCambio > 50)
+            {
+                //Debug.Log("CodigoColorAcambiar: " + codigoColorACambiar);
+                int cambiodColor = AjusteCodigoColorACambiar(codigoColorACambiar);
+
+                numeroDeCuadrosQueCambian = CambioColor(i, cambiodColor, numeroDeCuadrosQueCambian);
+                //Debug.Log("Se cambio el cuadro: " + i +"CodigoColorfinal: "+ cambiodColor);
+            }
+
+        }
+        return numeroDeCuadrosQueCambian;
     }
 
     private int CambioColor(int i, int cambiodColor, int numeroDeCuadrosQueCambian)
     {
-        //cuadroColor[i].AjusteColor(codigoColor);
         cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(cambiodColor);
         cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = cambiodColor;
         numeroDeCuadrosQueCambian--;
@@ -290,12 +292,13 @@ public class GameManager : MonoBehaviour {
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+        AsignarColoresAlInicio();
     }
 
     int AjusteCodigoColorACambiar(int codigoColor)
     {
         codigoColor++;
-        if (codigoColor == 4)
+        if (codigoColor > 3)
         {
             codigoColor = 1;
         }

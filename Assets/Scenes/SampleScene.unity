@@ -1173,8 +1173,9 @@ MonoBehaviour:
   - {fileID: 657168190}
   - {fileID: 551564372}
   - {fileID: 1808059441}
-  numeroDeCuadrosQueCambian1: 0
-  numeroDeCuadrosQueCambian2: 0
+  numeroDeCuadrosQueCambian1Totales: 2
+  numeroDeCuadrosQueCambian2Totales: 2
+  numeroDeCuadrosQueCambian3Totales: 1
 --- !u!4 &1205560867
 Transform:
   m_ObjectHideFlags: 0

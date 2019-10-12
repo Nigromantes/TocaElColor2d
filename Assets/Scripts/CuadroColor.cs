@@ -79,17 +79,27 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     {
         // Debug.Log("Se ejecuta el cambio de color");
 
+        AsignaciondeCodigoParaCambiodeOtrosCuadros();
         RotacionColor();
-        CambioDecolordeotroscuadrados();
+        
 
     }
 
-    private void CambioDecolordeotroscuadrados()
+    private void AsignaciondeCodigoParaCambiodeOtrosCuadros()
     {
+        //int codigoColorACamibiar1 = codigoColor;/*AjusteCodigoColorDefinitivo(codigoColor);*/
+        //int codigoColorACamibiar2 = codigoColor+2 /AjusteCodigoColor2(codigoColor);
+        //int codigoColorACamibiar3 =  AjusteCodigoColor2(codigoColor);;
+        ////int codigoColorACamibiar3 = codigoColor;
+
         int codigoColorACamibiar1 = AjusteCodigoColor1(codigoColor);
         int codigoColorACamibiar2 = AjusteCodigoColor2(codigoColor);
-       
-        GameManager.instance.AjusteDeCololorAlosCuadradosDesdeMangaer(codigoColorACamibiar1,codigoColorACamibiar2);
+        int codigoColorACamibiar3 = codigoColor;/*AjusteCodigoColor3(codigoColor);*/
+         //Debug.Log("codigoColorACamibiar2: " + codigoColorACamibiar2);
+        
+
+
+        GameManager.instance.AjusteDeCololorAlosCuadradosDesdeMangaer(codigoColorACamibiar1,codigoColorACamibiar2,codigoColorACamibiar3);
     }
 
     private void RotacionColor()
@@ -111,7 +121,7 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     int AjusteCodigoColor1(int codigoColor)
     {
         codigoColor++;
-        if (codigoColor == 4)
+        if (codigoColor > 3)
         {
             codigoColor = 1;
         }
@@ -121,7 +131,26 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     }
     int AjusteCodigoColor2(int codigoColor)
     {
-        codigoColor=+2;
+      
+        switch (codigoColor)
+        {
+            case 1: codigoColor = 3;
+                break;
+            case 2:
+                codigoColor = 1;
+                break;
+            case 3:
+                codigoColor = 2;
+                break;
+        }
+               
+        return codigoColor;
+       
+    }
+
+    int AjusteCodigoColor3(int codigoColor)
+    {
+        codigoColor = +3;
         if (codigoColor > 3)
         {
             codigoColor = 1;
@@ -130,5 +159,6 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
 
 
     }
+
 
 }
