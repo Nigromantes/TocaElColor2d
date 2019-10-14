@@ -113,6 +113,44 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public int NumeroDeCuadrosQueCambian1
+    {
+        get
+        {
+            return numeroDeCuadrosQueCambian1;
+        }
+
+        set
+        {
+            numeroDeCuadrosQueCambian1 = value;
+        }
+    }
+
+    public int NumeroDeCuadrosQueCambian2
+    {
+        get
+        {
+            return numeroDeCuadrosQueCambian2;
+        }
+
+        set
+        {
+            numeroDeCuadrosQueCambian2 = value;
+        }
+    }
+
+    public int NumeroDeCuadrosQueCambian3
+    {
+        get
+        {
+            return numeroDeCuadrosQueCambian3;
+        }
+
+        set
+        {
+            numeroDeCuadrosQueCambian3 = value;
+        }
+    }
 
     public int numeroDeCuadrosQueCambian1Totales;
     public int numeroDeCuadrosQueCambian2Totales;
@@ -133,9 +171,9 @@ public class GameManager : MonoBehaviour {
         amarillos = maximoDeCuadros;
 
         //numeroDeCuadrosQueCambian = maximoDeCuadros / 4
-        numeroDeCuadrosQueCambian1 = numeroDeCuadrosQueCambian1Totales;
-        numeroDeCuadrosQueCambian2 = numeroDeCuadrosQueCambian2Totales;
-        numeroDeCuadrosQueCambian3 = numeroDeCuadrosQueCambian3Totales;
+        NumeroDeCuadrosQueCambian1 = numeroDeCuadrosQueCambian1Totales;
+        NumeroDeCuadrosQueCambian2 = numeroDeCuadrosQueCambian2Totales;
+        NumeroDeCuadrosQueCambian3 = numeroDeCuadrosQueCambian3Totales;
 
         if (instance != null)
         {
@@ -240,17 +278,17 @@ public class GameManager : MonoBehaviour {
         {
 
 
-            numeroDeCuadrosQueCambian1 = CambiodeColorPorElmanager(codigoColorACambiar1, i, numeroDeCuadrosQueCambian1);
+            NumeroDeCuadrosQueCambian1 = CambiodeColorPorElmanager(codigoColorACambiar1, i, NumeroDeCuadrosQueCambian1);
 
-            numeroDeCuadrosQueCambian2 = CambiodeColorPorElmanager(codigoColorACambiar2, i, numeroDeCuadrosQueCambian2);
+            NumeroDeCuadrosQueCambian2 = CambiodeColorPorElmanager(codigoColorACambiar2, i, NumeroDeCuadrosQueCambian2);
 
-            numeroDeCuadrosQueCambian3 = CambiodeColorPorElmanager(codigoColorACambiar3, i, numeroDeCuadrosQueCambian3);
+            NumeroDeCuadrosQueCambian3 = CambiodeColorPorElmanager(codigoColorACambiar3, i, NumeroDeCuadrosQueCambian3);
 
         }
         //Ajustar para quede automático este ajuste. 
-        numeroDeCuadrosQueCambian1 = numeroDeCuadrosQueCambian1Totales;
-        numeroDeCuadrosQueCambian2 = numeroDeCuadrosQueCambian2Totales;
-        numeroDeCuadrosQueCambian3 = numeroDeCuadrosQueCambian3Totales;
+        NumeroDeCuadrosQueCambian1 = numeroDeCuadrosQueCambian1Totales;
+        NumeroDeCuadrosQueCambian2 = numeroDeCuadrosQueCambian2Totales;
+        NumeroDeCuadrosQueCambian3 = numeroDeCuadrosQueCambian3Totales;
 
 
     }
@@ -307,3 +345,4 @@ public class GameManager : MonoBehaviour {
 
     }
 }
+ 
