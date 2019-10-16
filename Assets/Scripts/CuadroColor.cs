@@ -79,8 +79,10 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     {
         // Debug.Log("Se ejecuta el cambio de color");
 
+        GameManager.instance.ManejoDePuntaje(codigoColor);
         AsignaciondeCodigoParaCambiodeOtrosCuadros();
         RotacionColor();
+        
         
 
     }

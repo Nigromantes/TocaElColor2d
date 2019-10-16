@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 
 public class GameManager : MonoBehaviour {
 
@@ -152,14 +154,24 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public int numeroDeCuadrosQueCambian1Totales;
-    public int numeroDeCuadrosQueCambian2Totales;
-    public int numeroDeCuadrosQueCambian3Totales;
-
+   
     int  numeroDeCuadrosQueCambian1;
     int  numeroDeCuadrosQueCambian2;
     int  numeroDeCuadrosQueCambian3;
 
+    public int numeroDeCuadrosQueCambian1Totales;
+    public int numeroDeCuadrosQueCambian2Totales;
+    public int numeroDeCuadrosQueCambian3Totales;
+
+    private int puntos;
+    private int maximoPuntaje;
+    private int colorATocar; 
+
+    //public TextMeshProUGUI textoDeColorACambiar_Titulo;
+    public TextMeshProUGUI textoDeColorACambiar_Color;
+    public TextMeshProUGUI textoDePuntos;
+    public TextMeshProUGUI textoDeMaximoPuntos;
+        
     public static GameManager instance;
     void Awake()
     {
@@ -185,6 +197,12 @@ public class GameManager : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
         }
 
+        puntos = 0;
+        maximoPuntaje = 0;
+
+
+        AsignacionDeColorATocar();
+
 
 
     }
@@ -197,7 +215,25 @@ public class GameManager : MonoBehaviour {
 
         AsignarColoresAlInicio();
     }
+    private void AsignacionDeColorATocar()
+    {
+        colorATocar = Random.Range(1, 4);
+        switch (colorATocar)
+        {
+            case 1:
+                textoDeColorACambiar_Color.text = "Azul";
 
+                break;
+            case 2:
+                textoDeColorACambiar_Color.text = "Rojo";
+
+                break;
+            case 3:
+                textoDeColorACambiar_Color.text = "Amarillo";
+
+                break;
+        }
+    }
     private void AsignarColoresAlInicio()
     {
         for (int i = 0; i < cuadroColor.Length; i++)
@@ -344,5 +380,30 @@ public class GameManager : MonoBehaviour {
 
 
     }
+
+    public void ManejoDePuntaje(int codigoColor)
+    {
+        if (codigoColor == colorATocar)
+        {
+            puntos++;
+        }
+        else
+        {
+           
+            if (puntos > maximoPuntaje)
+            {
+                maximoPuntaje = puntos;
+            }
+
+             puntos = 0;
+            AsignacionDeColorATocar();
+        }
+
+        textoDePuntos.text = "Puntos: " + puntos;
+        textoDeMaximoPuntos.text = "Máximo Puntaje: " + maximoPuntaje;
+    }
+
+
+    
 }
  
