@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI; 
 
 
 public class GameManager : MonoBehaviour {
@@ -171,11 +172,35 @@ public class GameManager : MonoBehaviour {
     public TextMeshProUGUI textoDeColorACambiar_Color;
     public TextMeshProUGUI textoDePuntos;
     public TextMeshProUGUI textoDeMaximoPuntos;
+
+    public Image ImageIndicador; 
         
     public static GameManager instance;
-    void Awake()
-    {
 
+    public Sprite sprite_Azul;
+    public Sprite sprite_Rojo;
+    public Sprite sprite_Amarillo;
+    public void Awake()
+    {
+       instance = this;
+
+        //if (instance != null)
+        //{
+        //    Destroy(gameObject);
+        //}
+        //else
+        //{
+        //    instance = this;
+        //    DontDestroyOnLoad(gameObject);
+        //}
+
+       
+
+        
+    }
+
+    public void DefinirVariables()
+    {
         maximoDeCuadros = cuadroColor.Length / 3;
 
         azules = maximoDeCuadros;
@@ -187,54 +212,56 @@ public class GameManager : MonoBehaviour {
         NumeroDeCuadrosQueCambian2 = numeroDeCuadrosQueCambian2Totales;
         NumeroDeCuadrosQueCambian3 = numeroDeCuadrosQueCambian3Totales;
 
-        if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-
         puntos = 0;
         maximoPuntaje = 0;
-
-
-        AsignacionDeColorATocar();
-
-
-
     }
-
 
 
     void Start()
     {
-
-
+        DefinirVariables();
+        AsignacionDeColorATocar();
         AsignarColoresAlInicio();
+
     }
-    private void AsignacionDeColorATocar()
+   
+    public void AsignacionDeColorATocar()
     {
         colorATocar = Random.Range(1, 4);
+        //switch (colorATocar)
+        //{
+        //    case 1:
+        //        textoDeColorACambiar_Color.text = "Azul";
+
+        //        break;
+        //    case 2:
+        //        textoDeColorACambiar_Color.text = "Rojo";
+
+        //        break;
+        //    case 3:
+        //        textoDeColorACambiar_Color.text = "Amarillo";
+
+        //        break;
+        //}
+
+
         switch (colorATocar)
         {
             case 1:
-                textoDeColorACambiar_Color.text = "Azul";
+                ImageIndicador.GetComponent<Image>().sprite = sprite_Azul;
 
                 break;
             case 2:
-                textoDeColorACambiar_Color.text = "Rojo";
+                ImageIndicador.GetComponent<Image>().sprite = sprite_Rojo;
 
                 break;
             case 3:
-                textoDeColorACambiar_Color.text = "Amarillo";
+                ImageIndicador.GetComponent<Image>().sprite = sprite_Rojo;
 
                 break;
         }
     }
-    private void AsignarColoresAlInicio()
+    public void AsignarColoresAlInicio()
     {
         for (int i = 0; i < cuadroColor.Length; i++)
         {
@@ -360,14 +387,7 @@ public class GameManager : MonoBehaviour {
 
 
     // Update is called once per frame
-    void Update()
-    {
-        if (Application.isEditor && Input.GetKeyDown(KeyCode.Backspace))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-        AsignarColoresAlInicio();
-    }
+ 
 
     int AjusteCodigoColorACambiar(int codigoColor)
     {
@@ -389,21 +409,25 @@ public class GameManager : MonoBehaviour {
         }
         else
         {
-           
+
             if (puntos > maximoPuntaje)
             {
                 maximoPuntaje = puntos;
             }
 
-             puntos = 0;
+            puntos = 0;
             AsignacionDeColorATocar();
         }
 
+        AjusteDeTextos();
+    }
+
+    private void AjusteDeTextos()
+    {
         textoDePuntos.text = "Puntos: " + puntos;
-        textoDeMaximoPuntos.text = "Máximo Puntaje: " + maximoPuntaje;
+        textoDeMaximoPuntos.text = "Máx P: " + maximoPuntaje;
     }
 
 
-    
 }
  

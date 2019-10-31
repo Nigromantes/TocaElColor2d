@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class CuadroColor : MonoBehaviour,IPointerDownHandler {
 
@@ -17,7 +18,10 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     public Sprite sprite_Rojo;
     public Sprite sprite_Amarillo;
 
-    private SpriteRenderer spriteRender;
+    //private SpriteRenderer spriteRender;
+    private Image image;
+
+    private Sprite sprite_Base;
     private int codigoColor = 0;
 
     public int CodigoColor
@@ -47,11 +51,13 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     // Use this for initialization
     void Awake() {
 
-        spriteRender = GetComponent<SpriteRenderer>();
+        // spriteRender = GetComponent<SpriteRenderer>();
+
+        image = GetComponent<Image>();
         //codigoColor = UnityEngine.Random.Range(1, 4);
         //codigoColor = 1; 
-        
-       AjusteColor(CodigoColor);
+
+        AjusteColor(CodigoColor);
 
 
 
@@ -61,11 +67,13 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     {
         switch (codigoColor)
         {
-            case 0: spriteRender.sprite = sprite_Blanco; break;
-            case 1: spriteRender.sprite = sprite_Azul; break;
-            case 2: spriteRender.sprite = sprite_Rojo; break;
-            case 3: spriteRender.sprite = sprite_Amarillo; break;
+            case 0: image.sprite = sprite_Blanco; break;
+            case 1: image.sprite = sprite_Azul; break;
+            case 2: image.sprite = sprite_Rojo; break;
+            case 3: image.sprite = sprite_Amarillo; break;
         }
+
+
 
     }
 

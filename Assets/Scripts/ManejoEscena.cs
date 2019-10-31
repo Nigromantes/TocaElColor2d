@@ -13,7 +13,14 @@ public class ManejoEscena : MonoBehaviour {
 
     }
 
-
+    void Update()
+    {
+        if (Application.isEditor && Input.GetKeyDown(KeyCode.Backspace))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        // AsignarColoresAlInicio();
+    }
 
 
 }
