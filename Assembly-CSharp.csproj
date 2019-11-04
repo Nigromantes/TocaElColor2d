@@ -53,9 +53,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\BaseDeDAtos\ComandosSQL.cs" />
+     <Compile Include="Assets\Scripts\BaseDeDAtos\ConexDB.cs" />
+     <Compile Include="Assets\Scripts\BaseDeDAtos\Ranking.cs" />
+     <Compile Include="Assets\Scripts\BaseDeDAtos\RankingManager.cs" />
+     <Compile Include="Assets\Scripts\BaseDeDAtos\RankingScript.cs" />
      <Compile Include="Assets\Scripts\CuadroColor.cs" />
      <Compile Include="Assets\Scripts\DisparadorDelJuego.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\Incio\ActivarPanelDesdeBoton.cs" />
+     <Compile Include="Assets\Scripts\Incio\BotonGuardarNombre.cs" />
+     <Compile Include="Assets\Scripts\Incio\NombreObjeto.cs" />
+     <Compile Include="Assets\Scripts\Incio\NombreScript.cs" />
+     <Compile Include="Assets\Scripts\Incio\PanelDatosNombres.cs" />
+     <Compile Include="Assets\Scripts\Incio\TextoSaludo.cs" />
+     <Compile Include="Assets\Scripts\ManejoBaseDatos\BaseDatosMaganer.cs" />
      <Compile Include="Assets\Scripts\ManejoEscena.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
@@ -283,6 +295,27 @@
  </Reference>
  <Reference Include="UnityEngine.SpatialTracking">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2018.2.20f1/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.Data">
+ <HintPath>D:/Usuario/Documentos  - Respaldo físico/Unity/TocaElColor2d/Assets/Plugins/Mono.Data.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.Data.Sqlite">
+ <HintPath>D:/Usuario/Documentos  - Respaldo físico/Unity/TocaElColor2d/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.Data.SqliteClient">
+ <HintPath>D:/Usuario/Documentos  - Respaldo físico/Unity/TocaElColor2d/Assets/Plugins/Mono.Data.SqliteClient.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Configuration">
+ <HintPath>D:/Usuario/Documentos  - Respaldo físico/Unity/TocaElColor2d/Assets/Plugins/System.Configuration.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Data">
+ <HintPath>D:/Usuario/Documentos  - Respaldo físico/Unity/TocaElColor2d/Assets/Plugins/System.Data.dll</HintPath>
+ </Reference>
+ <Reference Include="System.EnterpriseServices">
+ <HintPath>D:/Usuario/Documentos  - Respaldo físico/Unity/TocaElColor2d/Assets/Plugins/System.EnterpriseServices.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Security">
+ <HintPath>D:/Usuario/Documentos  - Respaldo físico/Unity/TocaElColor2d/Assets/Plugins/System.Security.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Users/Usuario/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
