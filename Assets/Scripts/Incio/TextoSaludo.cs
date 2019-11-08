@@ -10,16 +10,41 @@ public class TextoSaludo : MonoBehaviour {
     private TextMeshProUGUI textSaludo;
     private string nombre;
 
+    public static TextoSaludo instace;
+
+
+    void Awake()
+    {
+        instace = this;
+
+    }
+
 
     // Use this for initialization
     void Start()
     {
+        StearTextoSaludo();
 
+    }
+
+    public void StearTextoSaludo()
+    {
         textSaludo = GetComponent<TextMeshProUGUI>();
 
         nombre = baseDatosMaganer.EncontrarNombreActivo("*", "Nombres", "Activo", "=", "1");
-        textSaludo.text = "Hello: " + nombre;
-               
+
+
+        if (nombre != "nombre")
+        {
+            textSaludo.text = "Hello " + nombre+"!";
+
+        }
+        else
+        {
+            //Debug.Log("Se ejecuta la activacion de panel");
+            
+            GameManager2.instance.GetComponent<GameManager2>().panelGuardarNombre.SetActive(true);
+        }
 
     }
 }

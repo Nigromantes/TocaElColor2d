@@ -108,18 +108,50 @@ public class BaseDatosMaganer : MonoBehaviour {
     public void InsertarNombre(string nombre)
     {
         AbrirDB();
+
         comandosDB = conexionDB.CreateCommand();
-        string sqlQuery = String.Format("insert into Nombres(nombre) values(\"{0}\")", nombre);
+        string sqlQuery = String.Format("insert into Nombres(nombre,Activo) values(\"{0}\",\"{1}\")", nombre, 1);
         comandosDB.CommandText = sqlQuery;
         comandosDB.ExecuteScalar();
         CerrarDB();
+       
     }
 
-    //void Start()
-    //{
-    //    InsertarNombre("Juan");        
+    public void CrearNOmbreUnicoEnBaseDatos(string nombre)
+    {
+        GameObject tempPrefab = Instantiate(nombrePrefab);
+        tempPrefab.transform.SetParent(panelNombres);
+        tempPrefab.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+        tempPrefab.GetComponent<NombreScript>().AplicarNombre(nombre);
+    }
 
-    //}
+    public void SetearNombreInactivo()
+    {
+        AbrirDB();
+
+        comandosDB = conexionDB.CreateCommand();
+
+        //UPDATE employees
+        //SET lastname = 'Smith'
+        //WHERE employeeid = 3;
+
+        string sqlQuery = String.Format("UPDATE Nombres Set Activo = 0 WHERE Activo = 1");
+        comandosDB.CommandText = sqlQuery;
+        
+        comandosDB.ExecuteScalar();
+             
+
+
+        CerrarDB();
+    }
+
+    void Start()
+    {
+        //InsertarNombre("Juan");
+        //SetearComoInactivoTodosNOmbres();
+
+
+    }
 
 
     public string EncontrarNombreActivo(string item, string tabla, string campo, string comparador, string dato)
@@ -193,6 +225,18 @@ public class BaseDatosMaganer : MonoBehaviour {
     }
 
 
+    public void BorrarNombre(string nombre)
+    {
+        AbrirDB();
+        comandosDB = conexionDB.CreateCommand();
+        string sqlQuery = "delete from Nombres where Nombre = \"" + nombre + "\"";
+        comandosDB.CommandText = sqlQuery;
+        comandosDB.ExecuteScalar();
+        CerrarDB();
+    }
+
+
+
     void ObtenerObtenerNombres()
     {
         nombres.Clear();
@@ -217,7 +261,7 @@ public class BaseDatosMaganer : MonoBehaviour {
         /*Corregir este script*/
 
         ObtenerObtenerNombres();
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < nombres.Count; i++)
         {
             if (i < nombres.Count)
             {
@@ -230,6 +274,9 @@ public class BaseDatosMaganer : MonoBehaviour {
 
         }
     }
+
+
+
 
 
     //public void MostrarRanking()

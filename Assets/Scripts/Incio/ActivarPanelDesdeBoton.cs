@@ -14,4 +14,11 @@ public class ActivarPanelDesdeBoton : MonoBehaviour {
          panelParaActivar.SetActive(true);
 
     }
+
+
+    public void DesactivarPanel(GameObject panelParaActivar)
+    {
+        panelParaActivar.SetActive(false);
+
+    }
 }
