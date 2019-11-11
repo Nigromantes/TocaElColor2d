@@ -117,7 +117,7 @@ public class BaseDatosMaganer : MonoBehaviour {
        
     }
 
-    public void CrearNOmbreUnicoEnBaseDatos(string nombre)
+    public void CrearNombreUnicoEnBaseDatos(string nombre)
     {
         GameObject tempPrefab = Instantiate(nombrePrefab);
         tempPrefab.transform.SetParent(panelNombres);
@@ -145,13 +145,32 @@ public class BaseDatosMaganer : MonoBehaviour {
         CerrarDB();
     }
 
-    void Start()
+    public void SetearNombreActivo(string nombre)
     {
-        //InsertarNombre("Juan");
-        //SetearComoInactivoTodosNOmbres();
+        AbrirDB();
+
+        comandosDB = conexionDB.CreateCommand();
+        
+        
+        string sqlQuery = String.Format("UPDATE Nombres Set Activo = 1 WHERE Nombre =\"{0}\"", nombre);
+        comandosDB.CommandText = sqlQuery;
+
+        comandosDB.ExecuteScalar();
 
 
+
+        CerrarDB();
     }
+
+
+
+    //void Start()
+    //{
+    //    //InsertarNombre("Juan");
+    //    //SetearComoInactivoTodosNOmbres();
+
+
+    //}
 
 
     public string EncontrarNombreActivo(string item, string tabla, string campo, string comparador, string dato)

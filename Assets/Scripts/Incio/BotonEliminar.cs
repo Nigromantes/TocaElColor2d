@@ -5,10 +5,19 @@ using UnityEngine;
 public class BotonEliminar : MonoBehaviour {
 
 
-    public GameObject panelCambioColorElimnacion;
+    
     public bool BotonEliminarActivo = false;
+    
 
-  
+
+    private PanelDatosNombres panelDatosNombres;
+
+    private void Start()
+    {
+
+        panelDatosNombres = GetComponent<PanelDatosNombres>();
+    }
+
    public void AcitvarBoton()
     {
         if (BotonEliminarActivo)
@@ -34,8 +43,8 @@ public class BotonEliminar : MonoBehaviour {
     public void ActivarEliminacion()
     {
 
-        PanelDatosNombres.instance.elegir = false;
-        panelCambioColorElimnacion.SetActive(true);
+        panelDatosNombres.elegir = false;       
+        GameManagerInicio.instance.panelCambioColorElimnacion.SetActive(true);
 
        
 
@@ -45,11 +54,17 @@ public class BotonEliminar : MonoBehaviour {
     public void DesactivarEliminacion()
     {
 
-        PanelDatosNombres.instance.elegir = true;
-        panelCambioColorElimnacion.SetActive(false);
+        panelDatosNombres.elegir = true;
+        GameManagerInicio.instance.panelCambioColorElimnacion.SetActive(false);
 
 
 
     }
+
+    //public void AjustarPanelColorEliminar()
+    //{
+    //    GameManagerInicio.instance.panelCambioColorElimnacion.gameObject.transform.transform.localScale
+
+    //}
 
 }

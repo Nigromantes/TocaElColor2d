@@ -5,31 +5,36 @@ using UnityEngine.UI;
 
 public class BotonGuardarNombre : MonoBehaviour {
 
-    public GameObject gameManager2;
-    public Text textNombre;
-    public GameObject panelNombres; 
-    public GameObject panelGuardarNombre;
-    public GameObject textoSaludo;
-    public GameObject panelBaseDatosNombres;
+
+    private BaseDatosMaganer baseDatosMaganer;
+
+
+    void Start()
+    {
+        baseDatosMaganer = GetComponent<BaseDatosMaganer>();
+
+    }
     
     public void GuardarNombreBaseDatos()
     {
-        gameManager2.GetComponent<BaseDatosMaganer>().SetearNombreInactivo();
-        gameManager2.GetComponent<BaseDatosMaganer>().InsertarNombre(textNombre.text);
+        string nombreIngresdo = GameManagerInicio.instance.textoNombreIngresado.GetComponent<Text>().text;
 
-        //gameManager2.GetComponent<BaseDatosMaganer>().CrearNOmbreUnicoEnBaseDatos(textNombre.text);
-        if (panelBaseDatosNombres.activeInHierarchy == true)
+
+        baseDatosMaganer.SetearNombreInactivo();
+        baseDatosMaganer.InsertarNombre(nombreIngresdo);
+
+        if (GameManagerInicio.instance.panelBaseDatosNombres.activeInHierarchy == true)
         {
-            gameManager2.GetComponent<BaseDatosMaganer>().CrearNOmbreUnicoEnBaseDatos(textNombre.text);
+            //Debug.Log("crea el nombre solo");
+            baseDatosMaganer.CrearNombreUnicoEnBaseDatos(nombreIngresdo);
         }
 
-        panelNombres.SetActive(false);
-        panelGuardarNombre.SetActive(false);
-        textoSaludo.GetComponent<TextoSaludo>().StearTextoSaludo();
+        //GameManagerInicio.instance.textoNombreIngresado.GetComponent<Text>().text = "";
+        GameManagerInicio.instance.panelNombres.SetActive(false);
+        GameManagerInicio.instance.panelGuardarNombre.SetActive(false);
+        GameManagerInicio.instance.textoSaludo.GetComponent<TextoSaludo>().StearTextoSaludo();
         
 
     }
-
-   
-
+    
 }

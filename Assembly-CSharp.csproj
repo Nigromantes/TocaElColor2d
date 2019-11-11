@@ -65,8 +65,6 @@
      <Compile Include="Assets\Scripts\Incio\BotonEliminar.cs" />
      <Compile Include="Assets\Scripts\Incio\BotonGuardarNombre.cs" />
      <Compile Include="Assets\Scripts\Incio\ControlNombresBaseDatos.cs" />
-     <Compile Include="Assets\Scripts\Incio\GameManager2.cs" />
-     <Compile Include="Assets\Scripts\Incio\GameManagerControlInicio.cs" />
      <Compile Include="Assets\Scripts\Incio\GameManagerInicio.cs" />
      <Compile Include="Assets\Scripts\Incio\NombreObjeto.cs" />
      <Compile Include="Assets\Scripts\Incio\NombreScript.cs" />

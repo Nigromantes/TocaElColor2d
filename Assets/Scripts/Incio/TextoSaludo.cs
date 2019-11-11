@@ -6,18 +6,18 @@ using UnityEngine.UI;
 
 public class TextoSaludo : MonoBehaviour {
 
-    public BaseDatosMaganer baseDatosMaganer;
+    //public BaseDatosMaganer baseDatosMaganer;
     private TextMeshProUGUI textSaludo;
     private string nombre;
 
-    public static TextoSaludo instace;
+    //public static TextoSaludo instace;
 
 
-    void Awake()
-    {
-        instace = this;
+    //void Awake()
+    //{
+    //    instace = this;
 
-    }
+    //}
 
 
     // Use this for initialization
@@ -31,7 +31,7 @@ public class TextoSaludo : MonoBehaviour {
     {
         textSaludo = GetComponent<TextMeshProUGUI>();
 
-        nombre = baseDatosMaganer.EncontrarNombreActivo("*", "Nombres", "Activo", "=", "1");
+        nombre =  GameManagerInicio.instance.GetComponent<BaseDatosMaganer>().EncontrarNombreActivo("*", "Nombres", "Activo", "=", "1");
 
 
         if (nombre != "nombre")
@@ -43,7 +43,7 @@ public class TextoSaludo : MonoBehaviour {
         {
             //Debug.Log("Se ejecuta la activacion de panel");
             
-            GameManager2.instance.GetComponent<GameManager2>().panelGuardarNombre.SetActive(true);
+            GameManagerInicio.instance.GetComponent<GameManagerInicio>().panelGuardarNombre.SetActive(true);
         }
 
     }

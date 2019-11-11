@@ -7,29 +7,37 @@ using UnityEngine.EventSystems;
 public class ControlNombresBaseDatos : MonoBehaviour,IPointerDownHandler{
 
   
-   private Text textNombre; 
+   private Text textNombre;
+    
+
+   
       
     private void Start()
     {
         textNombre = GetComponentInChildren<Text>();
+        
+       
         
     }
 
  
     public void TocarNombreEnElPanel()
     {
-        if (PanelDatosNombres.instance.elegir)
+        if (GameManagerInicio.instance.GetComponent<PanelDatosNombres>().elegir)
         {
-           
-           GameManager2.instance.GetComponent<BaseDatosMaganer>().SetearNombreInactivo();
-           GameManager2.instance.GetComponent<BaseDatosMaganer>().InsertarNombre(textNombre.text);
 
-           PanelDatosNombres.instance.transform.gameObject.SetActive(false);            
-            TextoSaludo.instace.GetComponent<TextoSaludo>().StearTextoSaludo();
+
+            //Debug.Log("Se elige el nombre");
+           GameManagerInicio.instance.GetComponent<BaseDatosMaganer>().SetearNombreInactivo();
+           GameManagerInicio.instance.GetComponent<BaseDatosMaganer>().SetearNombreActivo(textNombre.text);
+
+           GameManagerInicio.instance.panelNombres.transform.gameObject.SetActive(false);            
+           GameManagerInicio.instance.textoSaludo.GetComponent<TextoSaludo>().StearTextoSaludo();
         }
         else
         {
-            GameManager2.instance.GetComponent<BaseDatosMaganer>().BorrarNombre(textNombre.text);
+            //Debug.Log("Se elimina el nombre"); 
+            GameManagerInicio.instance.GetComponent<BaseDatosMaganer>().BorrarNombre(textNombre.text);
             Destroy(gameObject);
             
 
