@@ -200,22 +200,25 @@ public class ControlPanalesColores : MonoBehaviour
     public void AsignacionDeColorATocar()
     {
         colorATocar = Random.Range(1, 4);
+        Debug.Log("Se ejectua el Asignación color");
 
         switch (colorATocar)
         {
             case 1:
-                //GameManger. ImageIndicador.GetComponent<Image>().sprite = sprite_Azul;
-                GameManager.instance.imageIndicador.GetComponent<Image>().sprite = sprite_Azul;
+                
+                GameManager.instance.imagenIndicador.GetComponent<Image>().sprite = sprite_Azul;
 
                 break;
             case 2:
+
+
                 //ImageIndicador.GetComponent<Image>().sprite = sprite_Rojo;
-                GameManager.instance.imageIndicador.GetComponent<Image>().sprite = sprite_Rojo;
+                GameManager.instance.imagenIndicador.GetComponent<Image>().sprite = sprite_Rojo;
 
                 break;
             case 3:
                 //ImageIndicador.GetComponent<Image>().sprite = sprite_Rojo;
-                GameManager.instance.imageIndicador.GetComponent<Image>().sprite = sprite_Amarillo;
+                GameManager.instance.imagenIndicador.GetComponent<Image>().sprite = sprite_Amarillo;
 
                 break;
         }
@@ -381,8 +384,7 @@ public class ControlPanalesColores : MonoBehaviour
     private void AjusteDeTextos()
     {
         GameManager.instance.textoDePuntos.text = "Puntos: " + puntos;
-        GameManager.instance.textoPuntajeFinal.text = "Puntos: " + puntos;
-
-        //GameManager.instance.textoDeMaximoPuntos.text = "Máx P: " + maximoPuntaje;
+        //GameManager.instance.textoPuntajeFinal.text = "Puntos: " + puntos;
+       GameManager.instance.textoDeMaximoPuntos.text = "Máx P: " + maximoPuntaje;
     }
 }

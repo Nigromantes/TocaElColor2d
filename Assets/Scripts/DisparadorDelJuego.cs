@@ -9,10 +9,10 @@ public class DisparadorDelJuego : MonoBehaviour {
 
         //Debug.Log("Se ejecuta el Stard del disparador");
 
-        //GameManager.instance.DefinirVariables();
-        GameManager.instance.Awake();
-        GameManager.instance.AsignacionDeColorATocar();
-        GameManager.instance.AsignarColoresAlInicio();
+        ////GameManager.instance.DefinirVariables();
+        //GameManager.instance.Awake();
+        //GameManager.instance.AsignacionDeColorATocar();
+        //GameManager.instance.AsignarColoresAlInicio();
 		
 	}
 	

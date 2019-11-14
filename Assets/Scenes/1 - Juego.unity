@@ -238,41 +238,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4807442779162d4ca934549e93633f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cuadroColor:
-  - {fileID: 312977249}
-  - {fileID: 913429867}
-  - {fileID: 996180690}
-  - {fileID: 317148393}
-  - {fileID: 1102381166}
-  - {fileID: 1295516813}
-  - {fileID: 2147146377}
-  - {fileID: 44705152}
-  - {fileID: 316922972}
-  - {fileID: 1677341014}
-  - {fileID: 742011634}
-  - {fileID: 1867506382}
-  - {fileID: 1856235904}
-  - {fileID: 1598167478}
-  - {fileID: 1039129386}
-  - {fileID: 754299677}
-  - {fileID: 1464648593}
-  - {fileID: 308154919}
-  - {fileID: 2080202443}
-  - {fileID: 2134933593}
-  - {fileID: 1706302581}
-  - {fileID: 2105706758}
-  - {fileID: 1341745158}
-  - {fileID: 1452904192}
-  numeroDeCuadrosQueCambian1Totales: 2
-  numeroDeCuadrosQueCambian2Totales: 2
-  numeroDeCuadrosQueCambian3Totales: 1
-  textoDeColorACambiar_Color: {fileID: 815397944}
+  panelControlDeColores: {fileID: 1248851851}
+  imagenIndicador: {fileID: 538229818}
   textoDePuntos: {fileID: 874373053}
+  textoPuntajeFinal: {fileID: 0}
   textoDeMaximoPuntos: {fileID: 211320735}
-  ImageIndicador: {fileID: 538229820}
-  sprite_Azul: {fileID: 21300000, guid: 5fd52fffcac062548bd46ae95e9f3110, type: 3}
-  sprite_Rojo: {fileID: 21300000, guid: c5d0d95814e49234ebc8d63ef9c11db5, type: 3}
-  sprite_Amarillo: {fileID: 21300000, guid: e41fafaf1ada5634a99b7b45dbbbee2b, type: 3}
 --- !u!1 &211320733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2247,8 +2217,9 @@ GameObject:
   - component: {fileID: 1248851854}
   - component: {fileID: 1248851853}
   - component: {fileID: 1248851855}
+  - component: {fileID: 1248851856}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Panel - Control Colores
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2353,6 +2324,48 @@ MonoBehaviour:
   m_Spacing: {x: 2, y: 2}
   m_Constraint: 1
   m_ConstraintCount: 4
+--- !u!114 &1248851856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1248851851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7141aaea9e821e4aa9155a6227d350c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cuadroColor:
+  - {fileID: 312977249}
+  - {fileID: 913429867}
+  - {fileID: 996180690}
+  - {fileID: 317148393}
+  - {fileID: 1102381166}
+  - {fileID: 1295516813}
+  - {fileID: 2147146377}
+  - {fileID: 44705152}
+  - {fileID: 316922972}
+  - {fileID: 1677341014}
+  - {fileID: 742011634}
+  - {fileID: 1867506382}
+  - {fileID: 1856235904}
+  - {fileID: 1598167478}
+  - {fileID: 1039129386}
+  - {fileID: 754299677}
+  - {fileID: 1464648593}
+  - {fileID: 308154919}
+  - {fileID: 2080202443}
+  - {fileID: 2134933593}
+  - {fileID: 1706302581}
+  - {fileID: 2105706758}
+  - {fileID: 1341745158}
+  - {fileID: 1452904192}
+  numeroDeCuadrosQueCambian1Totales: 2
+  numeroDeCuadrosQueCambian2Totales: 2
+  numeroDeCuadrosQueCambian3Totales: 1
+  sprite_Azul: {fileID: 21300000, guid: 5fd52fffcac062548bd46ae95e9f3110, type: 3}
+  sprite_Rojo: {fileID: 21300000, guid: c5d0d95814e49234ebc8d63ef9c11db5, type: 3}
+  sprite_Amarillo: {fileID: 21300000, guid: e41fafaf1ada5634a99b7b45dbbbee2b, type: 3}
 --- !u!1 &1268351164
 GameObject:
   m_ObjectHideFlags: 0
