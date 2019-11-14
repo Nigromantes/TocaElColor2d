@@ -200,7 +200,7 @@ public class ControlPanalesColores : MonoBehaviour
     public void AsignacionDeColorATocar()
     {
         colorATocar = Random.Range(1, 4);
-        Debug.Log("Se ejectua el Asignación color");
+        //Debug.Log("Se ejectua el Asignación color");
 
         switch (colorATocar)
         {
