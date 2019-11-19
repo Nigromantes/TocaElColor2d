@@ -3,30 +3,48 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 
 public class GameManager : MonoBehaviour {
 
-    public enum EstadoJuego {Inicio, Preambulo, Juego, GameOver}
+    public enum EstadoJuego { Inicio, Preambulo, Juego, GameOver }
 
 
     public static GameManager instance;
 
     //Objetos referidos. 
 
-    public GameObject panelControlDeColores; 
+    public GameObject panelControlDeColores;
 
-    public GameObject imagenIndicador; 
+    public GameObject imagenIndicador;
 
-    public TextMeshProUGUI textoDePuntos; 
+    public TextMeshProUGUI textoDePuntos;
 
     public TextMeshProUGUI textoPuntajeFinal;
 
     public TextMeshProUGUI textoDeMaximoPuntos;
 
+    public GameObject panelBloqueo;
+    //public GameObject panelIntermedio;
+    //public TextMeshProUGUI textoListo;    
+    //public Button botonElegirNivel;
 
+    //public Button botonIniciarJuego;
 
+    //public TextMeshProUGUI guiaColorATocar;
+    //public TextMeshProUGUI tutorial;
+    //public TextMeshProUGUI conteo;
+
+    //public TextMeshProUGUI textgameOver;
+    //public TextMeshProUGUI textPuntajeFinal;
+    //public TextMeshProUGUI  textResultado;
+
+    public GameObject panelInicio;
+    public GameObject panelPreambulo;
+    public GameObject panelGameOver;
+         
+    
     private void Awake()
     {
 
@@ -34,20 +52,26 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    public void CambioDeEstadoDeJuego(EstadoJuego estadoDeJuego)
+    private void Start()
+    {
+         CambioDeEstadoDeJuego(0);
+    }
+
+ 
+    public void CambioDeEstadoDeJuego(int estadoDeJuego)
     {
         switch (estadoDeJuego)
         {
-            case EstadoJuego.Inicio:
+            case 0:
                 EstadoDeJuegoInicio();
                 break;
-            case EstadoJuego.Preambulo:
+            case 1:
                 EstadoDeJuegoPreambulo();
                 break;
-            case EstadoJuego.Juego:
-                EstadoDeJuegoPreambulo();
+            case 2:
+                EstadoDeJuegoJuego();
                 break;
-            case EstadoJuego.GameOver:
+            case 3:
                 EstadoDeJuegoGameOver();
                 break;
             default:
@@ -57,40 +81,37 @@ public class GameManager : MonoBehaviour {
 
     }
 
+  
     private void EstadoDeJuegoInicio()
     {
-        //Acá aparece un panel de juego donde el jugador podrá elegir el nivel. 
-
-        //Texto ¿Ready? 
-        //Botón de elegir nivel. 
-        //Record del nivel
-        //Boton Iniciar Juego. 
-
-        //Panel de bloqueo que evita que se activen los cuadros - color antes de tiempo. 
-
+        panelInicio.SetActive(true);
+        panelBloqueo.SetActive(true);
+     
     }
 
     private void EstadoDeJuegoPreambulo()
     {
-        //Se desactiva el panel. 
-        //Se activa el texto tutorial. 
-        //Se activa un conteo. 
+        panelInicio.SetActive(false);
+        panelGameOver.SetActive(false);
+        panelPreambulo.SetActive(true);
+        panelControlDeColores.GetComponent<ControlPanelColores>().AsignacionDeColorATocar();
+        
+        //Actviar el indiciador del color. 
 
     }
 
     private void EstadoDeJuegoJuego()
     {
-        //Se Activa el juego
-        //Se desactiva el panel de bloqueo. 
+        panelPreambulo.SetActive(false);
+        panelBloqueo.SetActive(false);
     }
 
     private void EstadoDeJuegoGameOver()
     {
-        //Se activa el panel intermedio. 
-        //Se  desactiva el texto ¿Ready? 
-        //Se activa el texto "GameOver"
 
-        //Se activa el panel de bloqueo. 
+        panelGameOver.SetActive(true);
+        panelBloqueo.SetActive(true);
+
 
     }
 

@@ -69,9 +69,9 @@
      <Compile Include="Assets\Scripts\Incio\NombreScript.cs" />
      <Compile Include="Assets\Scripts\Incio\PanelDatosNombres.cs" />
      <Compile Include="Assets\Scripts\Incio\TextoSaludo.cs" />
-     <Compile Include="Assets\Scripts\Juego\ControlPanalesColores.cs" />
+     <Compile Include="Assets\Scripts\Juego\ControlAnimacionConteo.cs" />
+     <Compile Include="Assets\Scripts\Juego\ControlPanelColores.cs" />
      <Compile Include="Assets\Scripts\Juego\CuadroColor.cs" />
-     <Compile Include="Assets\Scripts\Juego\PanelColores.cs" />
      <Compile Include="Assets\Scripts\ManejoBaseDatos\BaseDatosMaganer.cs" />
      <Compile Include="Assets\Scripts\ManejoEscena.cs" />
      <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />

@@ -87,7 +87,7 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     {
         // Debug.Log("Se ejecuta el cambio de color");
 
-        GameManager.instance.panelControlDeColores.GetComponent<ControlPanalesColores>().ManejoDePuntaje(codigoColor);
+        GameManager.instance.panelControlDeColores.GetComponent<ControlPanelColores>().ManejoDePuntaje(codigoColor);
 
 
         AsignaciondeCodigoParaCambiodeOtrosCuadros();
@@ -111,7 +111,7 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
         
 
 
-        GameManager.instance.panelControlDeColores.GetComponent<ControlPanalesColores>().AjusteDeCololorAlosCuadradosDesdeMangaer(codigoColorACamibiar1,codigoColorACamibiar2,codigoColorACamibiar3);
+        GameManager.instance.panelControlDeColores.GetComponent<ControlPanelColores>().AjusteDeCololorAlosCuadradosDesdeMangaer(codigoColorACamibiar1,codigoColorACamibiar2,codigoColorACamibiar3);
     }
 
     private void RotacionColor()
