@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\Incio\NombreScript.cs" />
      <Compile Include="Assets\Scripts\Incio\PanelDatosNombres.cs" />
      <Compile Include="Assets\Scripts\Incio\TextoSaludo.cs" />
+     <Compile Include="Assets\Scripts\Juego\BotonNivel.cs" />
      <Compile Include="Assets\Scripts\Juego\ControlAnimacionConteo.cs" />
      <Compile Include="Assets\Scripts\Juego\ControlImagentiempo.cs" />
      <Compile Include="Assets\Scripts\Juego\ControlPanelColores.cs" />

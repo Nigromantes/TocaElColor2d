@@ -44,8 +44,11 @@ public class GameManager : MonoBehaviour {
     public GameObject panelPreambulo;
     public GameObject panelGameOver;
     public GameObject imagenContadorTiempo;
-    public Sprite spriteBomba;
-    public Sprite spriteBonus;
+    //public Sprite spriteBomba;
+    //public Sprite spriteBonus;
+    
+    public int nivelDeJuego;
+
 
 
     private void Awake()
@@ -57,7 +60,7 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
-       //  CambioDeEstadoDeJuego(0);
+         CambioDeEstadoDeJuego(0);
     }
 
  

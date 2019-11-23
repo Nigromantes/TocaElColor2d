@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -207,10 +208,32 @@ public class ControlPanelColores : MonoBehaviour
         NumeroDeCuadrosQueCambian2 = numeroDeCuadrosQueCambian2Totales;
         NumeroDeCuadrosQueCambian3 = numeroDeCuadrosQueCambian3Totales;
 
+
+        AjusteDeModificadorTiempo();
+
         puntos = 0;
         maximoPuntaje = 0;
         ReiniciarTiempoMaximo();
 
+    }
+
+    private void AjusteDeModificadorTiempo()
+    {
+        switch (GameManager.instance.nivelDeJuego)
+        {
+            case 0:
+                tiempoMaximoModificador = 0;
+                break;
+            case 1:
+                tiempoMaximoModificador = -0.10f;
+                break;
+            case 2:
+                tiempoMaximoModificador = -0.25f;
+                break;
+
+            default:
+                break;
+        }
     }
 
     public void ReiniciarTiempoMaximo()
@@ -250,7 +273,7 @@ public class ControlPanelColores : MonoBehaviour
 
     public void AsignacionDeColorATocar()
     {
-        colorATocar = Random.Range(1, 4);
+        colorATocar = UnityEngine.Random.Range(1, 4);
         //Debug.Log("Se ejectua el Asignación color");
 
         switch (colorATocar)
@@ -375,7 +398,7 @@ public class ControlPanelColores : MonoBehaviour
         if (cuadroColor[i].GetComponent<CuadroColor>().CodigoColor == (codigoColorACambiar))
         {
 
-            int portecentajeDeCambio = Random.Range(1, 101);
+            int portecentajeDeCambio = UnityEngine.Random.Range(1, 101);
             //Debug.Log(portecentajeDeCambio);
             if (numeroDeCuadrosQueCambian > 0 && portecentajeDeCambio > 50)
             {

@@ -9,12 +9,7 @@ using Random = UnityEngine.Random;
 //using Random = System.Random;
 
 public class CuadroColor : MonoBehaviour, IPointerDownHandler {
-
-
-
-
-
-
+          
     public Sprite sprite_Blanco;
     public Sprite sprite_Azul;
     public Sprite sprite_Rojo;
@@ -22,20 +17,22 @@ public class CuadroColor : MonoBehaviour, IPointerDownHandler {
 
     //private SpriteRenderer spriteRender;
     private Image image;
-    private Transform imagenHijo;
+    private Transform TransformImagenHijo;
     private Image imageModificador;
 
     private Sprite sprite_Base;
     private int codigoColor = 0;
 
-    private int nivelDeJuego = 1;
     private int modificadorEspecial;
-
+    private int nivelDeJuego;
     // 0 = Ninguno. 
     // 1 = Bomba -5 puntos. 
     // 2 = Bono x3 
     public Sprite spriteBomba;
     public Sprite spriteBonus;
+
+    int porcentajeLimiteModificadorInicial;
+    int porcentajeLimiiteDeTipoModificador;
 
     public int CodigoColor
     {
@@ -67,36 +64,55 @@ public class CuadroColor : MonoBehaviour, IPointerDownHandler {
         // spriteRender = GetComponent<SpriteRenderer>();
 
         image = GetComponent<Image>();
-        imagenHijo = this.gameObject.transform.GetChild(0);
+        TransformImagenHijo = this.gameObject.transform.GetChild(0);
 
-        imageModificador = imagenHijo.GetComponent<Image>();
+        imageModificador = TransformImagenHijo.GetComponent<Image>();
         
-
-
-
-
         //codigoColor = UnityEngine.Random.Range(1, 4);
         //codigoColor = 1; 
 
         AjusteColor(CodigoColor);
-       DefinirModificador();
+        nivelDeJuego = GameManager.instance.nivelDeJuego;
+        DefinirModificador();
+        //nivelDeJuego = 2;
 
     }
 
+
+
     public void DefinirModificador()
     {
+        
 
-        
-        imageModificador.GetComponent<Image>().sprite = spriteBomba;
+        switch (nivelDeJuego)
+        {
+            case 0:
+                porcentajeLimiteModificadorInicial = 5;
+                porcentajeLimiiteDeTipoModificador = 70;
 
-        int porcentajeLimiteModificador = 5;
-        int porcentajeLimiiteDeTipoModificador = 40;
-        
-        int probailidadDeModifiador;
-        
-        probailidadDeModifiador = Random.Range(1, 100);
-        //Se es menos al porcentaje se vuelve un modificador. 
-        if (probailidadDeModifiador< porcentajeLimiteModificador)
+                break;
+            case 1:
+                porcentajeLimiteModificadorInicial = 10;
+                porcentajeLimiiteDeTipoModificador = 60;
+
+                break;
+
+            case 2:
+                porcentajeLimiteModificadorInicial = 15;
+                porcentajeLimiiteDeTipoModificador = 50;
+
+                break;
+
+            default:
+                porcentajeLimiteModificadorInicial = 5;
+                porcentajeLimiiteDeTipoModificador = 70;
+                break;
+        }
+
+
+        int probailidadDeModifiador = Random.Range(1, 100);
+
+        if (probailidadDeModifiador< porcentajeLimiteModificadorInicial)
         {
             int probabilidadTipoModificador = Random.Range(1, 100);
 
@@ -122,24 +138,7 @@ public class CuadroColor : MonoBehaviour, IPointerDownHandler {
             ReiniciarModificadores();
 
         }
-
-
-
-        switch (nivelDeJuego)
-        {
-            case 1:
-                
-                break;
-
-            default:
-                break;
-        }
-
-
-
-        //modificadorEspecial = 1;
-
-
+        
     }
 
     public void ReiniciarModificadores()
