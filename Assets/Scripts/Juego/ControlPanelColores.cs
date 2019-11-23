@@ -23,6 +23,10 @@ public class ControlPanelColores : MonoBehaviour
     int codigoColorRojo = 2;
     int codigoColorAmarillo = 3;
 
+    int incrementoPuntos;
+
+
+
     public int CodigoColorAzul
     {
         get
@@ -170,6 +174,25 @@ public class ControlPanelColores : MonoBehaviour
     public Sprite sprite_Rojo;
     public Sprite sprite_Amarillo;
 
+    private float tiempoMaximoBase = 1f;
+    private float tiempoMaximoModificador = 0f;
+    private float tiempoMaximoJuego;
+
+    public bool conteoActivo = false;
+
+
+    public float TiempoInicial {
+
+        get
+        {
+            return tiempoMaximoBase + tiempoMaximoModificador;
+
+        }
+
+    }
+
+
+
 
     public void DefinirVariables()
     {
@@ -186,15 +209,43 @@ public class ControlPanelColores : MonoBehaviour
 
         puntos = 0;
         maximoPuntaje = 0;
+        ReiniciarTiempoMaximo();
+
     }
 
+    public void ReiniciarTiempoMaximo()
+    {
+        tiempoMaximoJuego = TiempoInicial;
+    }
 
     void Start()
     {
         DefinirVariables();
-        AsignacionDeColorATocar();
+        //AsignacionDeColorATocar();
         AsignarColoresAlInicio();
+        
+    }
 
+    void Update()
+    {
+        ConteoTiempo();
+
+    }
+
+    private void ConteoTiempo()
+    {
+        if (conteoActivo)
+        {
+            tiempoMaximoJuego -= Time.deltaTime;
+            if (tiempoMaximoJuego < 0)
+            {
+                //Debug.Log("Se acabó el tiempo");
+                GameManager.instance.CambioDeEstadoDeJuego(3);
+                
+
+            }
+            GameManager.instance.imagenContadorTiempo.GetComponent<Image>().fillAmount = (tiempoMaximoJuego);
+        }
     }
 
     public void AsignacionDeColorATocar()
@@ -288,6 +339,7 @@ public class ControlPanelColores : MonoBehaviour
     {
         cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(codigoDeColor);
         cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = codigoDeColor;
+        
 
         cantidadColores--;
         return cantidadColores;
@@ -342,6 +394,11 @@ public class ControlPanelColores : MonoBehaviour
     {
         cuadroColor[i].GetComponent<CuadroColor>().AjusteColor(cambiodColor);
         cuadroColor[i].GetComponent<CuadroColor>().CodigoColor = cambiodColor;
+
+        cuadroColor[i].GetComponent<CuadroColor>().ReiniciarModificadores();
+        cuadroColor[i].GetComponent<CuadroColor>().DefinirModificador();
+
+
         numeroDeCuadrosQueCambian--;
         return numeroDeCuadrosQueCambian;
     }
@@ -360,11 +417,23 @@ public class ControlPanelColores : MonoBehaviour
 
     }
 
-    public void ManejoDePuntaje(int codigoColor)
+    public void ManejoDePuntaje(int codigoColor,int modificador)
     {
+       //int incrementoPuntos;
+
+        switch (modificador)
+        {
+            case 0: incrementoPuntos = 1; break;
+            case 1: incrementoPuntos = -8; break;
+            case 2: incrementoPuntos = 4; break;
+            default: incrementoPuntos = 1; break;
+        }
+
+
         if (codigoColor == colorATocar)
         {
-            puntos++;
+            puntos+=incrementoPuntos;
+            ReiniciarTiempoMaximo();
         }
         else
         {
@@ -376,6 +445,7 @@ public class ControlPanelColores : MonoBehaviour
 
             puntos = 0;
             //AsignacionDeColorATocar();
+            
             GameManager.instance.CambioDeEstadoDeJuego(3);
 
         }

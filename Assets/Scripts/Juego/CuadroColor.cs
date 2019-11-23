@@ -5,13 +5,15 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
+//using Random = System.Random;
 
-public class CuadroColor : MonoBehaviour,IPointerDownHandler {
+public class CuadroColor : MonoBehaviour, IPointerDownHandler {
 
-	
-    //public enum Color {Azul,Rojo,Amarillo};
 
- 
+
+
+
 
     public Sprite sprite_Blanco;
     public Sprite sprite_Azul;
@@ -20,9 +22,20 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
 
     //private SpriteRenderer spriteRender;
     private Image image;
+    private Transform imagenHijo;
+    private Image imageModificador;
 
     private Sprite sprite_Base;
     private int codigoColor = 0;
+
+    private int nivelDeJuego = 1;
+    private int modificadorEspecial;
+
+    // 0 = Ninguno. 
+    // 1 = Bomba -5 puntos. 
+    // 2 = Bono x3 
+    public Sprite spriteBomba;
+    public Sprite spriteBonus;
 
     public int CodigoColor
     {
@@ -54,13 +67,85 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
         // spriteRender = GetComponent<SpriteRenderer>();
 
         image = GetComponent<Image>();
+        imagenHijo = this.gameObject.transform.GetChild(0);
+
+        imageModificador = imagenHijo.GetComponent<Image>();
+        
+
+
+
+
         //codigoColor = UnityEngine.Random.Range(1, 4);
         //codigoColor = 1; 
 
         AjusteColor(CodigoColor);
+       DefinirModificador();
+
+    }
+
+    public void DefinirModificador()
+    {
+
+        
+        imageModificador.GetComponent<Image>().sprite = spriteBomba;
+
+        int porcentajeLimiteModificador = 5;
+        int porcentajeLimiiteDeTipoModificador = 40;
+        
+        int probailidadDeModifiador;
+        
+        probailidadDeModifiador = Random.Range(1, 100);
+        //Se es menos al porcentaje se vuelve un modificador. 
+        if (probailidadDeModifiador< porcentajeLimiteModificador)
+        {
+            int probabilidadTipoModificador = Random.Range(1, 100);
+
+            if (probabilidadTipoModificador > porcentajeLimiiteDeTipoModificador)
+            {
+                modificadorEspecial = 1;
+                imageModificador.GetComponent<Image>().enabled = true;
+                imageModificador.GetComponent<Image>().sprite = spriteBomba;
+
+
+            }
+            else
+            {
+                modificadorEspecial = 2;
+                imageModificador.GetComponent<Image>().enabled = true;
+                imageModificador.GetComponent<Image>().sprite = spriteBonus;
+            }
+
+
+        }
+        else
+        {
+            ReiniciarModificadores();
+
+        }
 
 
 
+        switch (nivelDeJuego)
+        {
+            case 1:
+                
+                break;
+
+            default:
+                break;
+        }
+
+
+
+        //modificadorEspecial = 1;
+
+
+    }
+
+    public void ReiniciarModificadores()
+    {
+        imageModificador.GetComponent<Image>().enabled = false;
+        modificadorEspecial = 0;
     }
 
     public void AjusteColor(int codigoColor)
@@ -87,13 +172,13 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
     {
         // Debug.Log("Se ejecuta el cambio de color");
 
-        GameManager.instance.panelControlDeColores.GetComponent<ControlPanelColores>().ManejoDePuntaje(codigoColor);
+        GameManager.instance.panelControlDeColores.GetComponent<ControlPanelColores>().ManejoDePuntaje(codigoColor, modificadorEspecial);
 
 
         AsignaciondeCodigoParaCambiodeOtrosCuadros();
         RotacionColor();
         
-        
+
 
     }
 
@@ -168,9 +253,10 @@ public class CuadroColor : MonoBehaviour,IPointerDownHandler {
             codigoColor = 1;
         }
         return codigoColor;
-
-
     }
+
+    
+    
 
 
 }

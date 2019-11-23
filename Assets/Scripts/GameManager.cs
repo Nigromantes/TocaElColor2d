@@ -43,8 +43,11 @@ public class GameManager : MonoBehaviour {
     public GameObject panelInicio;
     public GameObject panelPreambulo;
     public GameObject panelGameOver;
-         
-    
+    public GameObject imagenContadorTiempo;
+    public Sprite spriteBomba;
+    public Sprite spriteBonus;
+
+
     private void Awake()
     {
 
@@ -54,7 +57,7 @@ public class GameManager : MonoBehaviour {
 
     private void Start()
     {
-         CambioDeEstadoDeJuego(0);
+       //  CambioDeEstadoDeJuego(0);
     }
 
  
@@ -95,7 +98,8 @@ public class GameManager : MonoBehaviour {
         panelGameOver.SetActive(false);
         panelPreambulo.SetActive(true);
         panelControlDeColores.GetComponent<ControlPanelColores>().AsignacionDeColorATocar();
-        
+        panelControlDeColores.GetComponent<ControlPanelColores>().ReiniciarTiempoMaximo();
+
         //Actviar el indiciador del color. 
 
     }
@@ -104,11 +108,13 @@ public class GameManager : MonoBehaviour {
     {
         panelPreambulo.SetActive(false);
         panelBloqueo.SetActive(false);
+        panelControlDeColores.GetComponent<ControlPanelColores>().conteoActivo = true;
+        
     }
 
     private void EstadoDeJuegoGameOver()
     {
-
+        panelControlDeColores.GetComponent<ControlPanelColores>().conteoActivo = false;
         panelGameOver.SetActive(true);
         panelBloqueo.SetActive(true);
 
