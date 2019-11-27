@@ -13,21 +13,30 @@ public class BotonNivel : MonoBehaviour {
     //private TextMeshProUGUI textoNivel;
     public TextMeshProUGUI textoNivel;
     private string TextoDeElNivelActual;
+    //int nivelActual;
 
     private void Start()
     {
+
+      int nivelActual = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
+
         //transformTextoNivelHijo = this.gameObject.transform.GetChild(0);
         //textoNivel = transformTextoNivelHijo.GetComponent<TextMeshProUGUI>();
-        TextoDeElNivelActual = DeterminarTextoActualNivel();
-        AjusteNivel(GameManager.instance.nivelDeJuego, TextoDeElNivelActual);
+        TextoDeElNivelActual = DeterminarTextoActualNivel(nivelActual);
+        //AjusteNivel(nivelActual, TextoDeElNivelActual);
+        //AjusteNivel(GameManager.instance.nivelDeJuego, TextoDeElNivelActual);
+        AjusteTextoInicial(TextoDeElNivelActual);
 
+        Debug.Log(nivelActual);
     }
 
 
     public void ComportamientoBotonNivel()
     {
+
+        int nivelActual = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
         int nuevoNivel = 0;
-        switch (GameManager.instance.nivelDeJuego)
+        switch (nivelActual)
         {
             case 0: nuevoNivel = 1;
                 break;
@@ -42,29 +51,40 @@ public class BotonNivel : MonoBehaviour {
         }
 
 
-        TextoDeElNivelActual = DeterminarTextoNuevoNivel();
+        TextoDeElNivelActual = DeterminarTextoActualNivel(nuevoNivel);
         AjusteNivel(nuevoNivel, TextoDeElNivelActual);
 
     }
 
     private void AjusteNivel(int nuevoNivel, string textoNuevoNivel)
     {
-        GameManager.instance.nivelDeJuego = nuevoNivel;
+        //GameManager.instance.nivelDeJuego = nuevoNivel;
+        GameManager.instance.GetComponent<BaseDatosMaganer>().SeteaNivelActivo(nuevoNivel);
+
+
         textoNivel.text = textoNuevoNivel;
+
+        Debug.Log(nuevoNivel);
                      
     }
 
-    private string DeterminarTextoActualNivel()
+    private void AjusteTextoInicial(string TextoNivelInicial)
+    {
+
+        textoNivel.text = TextoNivelInicial;
+    }
+
+    private string DeterminarTextoActualNivel(int nivelActual)
     {
         string textoSegunNivel ="";
 
-        switch (GameManager.instance.nivelDeJuego)
+        switch (nivelActual)
         {
             case 0:
                     textoSegunNivel = "Easy";
                 break;
             case 1:
-                    textoSegunNivel = "Midium";
+                    textoSegunNivel = "Medium";
                 break;
             case 2:
                     textoSegunNivel = "Hard";
@@ -78,29 +98,4 @@ public class BotonNivel : MonoBehaviour {
         return textoSegunNivel;
     }
 
-
-    private string DeterminarTextoNuevoNivel()
-    {
-        string textoSegunNivel = "";
-
-        switch (GameManager.instance.nivelDeJuego)
-        {
-            case 0:
-                textoSegunNivel  = "Medium";
-                
-                break;
-            case 1:
-                textoSegunNivel = "Hard";
-                break;
-            case 2:
-                textoSegunNivel = "Easy";
-                break;
-
-            default:
-                textoSegunNivel = "wtf?";
-                break;
-        }
-
-        return textoSegunNivel;
-    }
 }

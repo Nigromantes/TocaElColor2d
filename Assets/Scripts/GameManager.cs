@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour {
     //public Sprite spriteBomba;
     //public Sprite spriteBonus;
     
-    public int nivelDeJuego;
+    //public int nivelDeJuego;
 
 
 

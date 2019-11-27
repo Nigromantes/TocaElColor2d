@@ -72,7 +72,7 @@ public class CuadroColor : MonoBehaviour, IPointerDownHandler {
         //codigoColor = 1; 
 
         AjusteColor(CodigoColor);
-        nivelDeJuego = GameManager.instance.nivelDeJuego;
+        
         DefinirModificador();
         //nivelDeJuego = 2;
 
@@ -82,7 +82,7 @@ public class CuadroColor : MonoBehaviour, IPointerDownHandler {
 
     public void DefinirModificador()
     {
-        
+        int nivelDeJuego = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
 
         switch (nivelDeJuego)
         {

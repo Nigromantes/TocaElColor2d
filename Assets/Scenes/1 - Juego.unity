@@ -1791,6 +1791,7 @@ GameObject:
   m_Component:
   - component: {fileID: 184384720}
   - component: {fileID: 184384721}
+  - component: {fileID: 184384722}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1833,6 +1834,19 @@ MonoBehaviour:
   panelGameOver: {fileID: 276231922}
   imagenContadorTiempo: {fileID: 114542069}
   nivelDeJuego: 2
+--- !u!114 &184384722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 184384719}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eba6125268a72f4dad5c639892958ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nombrePrefab: {fileID: 0}
+  panelNombres: {fileID: 0}
 --- !u!1 &211320733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,7 +2087,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &276231923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5342,6 +5356,7 @@ GameObject:
   - component: {fileID: 829419258}
   - component: {fileID: 829419257}
   - component: {fileID: 829419256}
+  - component: {fileID: 829419259}
   m_Layer: 5
   m_Name: Button - Nivel
   m_TagString: Untagged
@@ -5408,7 +5423,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 829419257}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 829419259}
+        m_MethodName: ComportamientoBotonNivel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &829419257
@@ -5445,6 +5471,18 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 829419254}
   m_CullTransparentMesh: 0
+--- !u!114 &829419259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 829419254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2ad0e428ec8e934fb01de9a9e0fe5cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  textoNivel: {fileID: 1554175526}
 --- !u!1 &855145829
 GameObject:
   m_ObjectHideFlags: 0

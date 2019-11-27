@@ -63,7 +63,7 @@
      <Compile Include="Assets\Scripts\Incio\ActivarPanelDesdeBoton.cs" />
      <Compile Include="Assets\Scripts\Incio\BotonEliminar.cs" />
      <Compile Include="Assets\Scripts\Incio\BotonGuardarNombre.cs" />
-     <Compile Include="Assets\Scripts\Incio\ControlNombresBaseDatos.cs" />
+     <Compile Include="Assets\Scripts\Incio\ControlBaseNombresDatos.cs" />
      <Compile Include="Assets\Scripts\Incio\GameManagerInicio.cs" />
      <Compile Include="Assets\Scripts\Incio\NombreObjeto.cs" />
      <Compile Include="Assets\Scripts\Incio\NombreScript.cs" />
@@ -76,7 +76,6 @@
      <Compile Include="Assets\Scripts\Juego\CuadroColor.cs" />
      <Compile Include="Assets\Scripts\ManejoBaseDatos\BaseDatosMaganer.cs" />
      <Compile Include="Assets\Scripts\ManejoEscena.cs" />
-     <Compile Include="Assets\Scripts\NewBehaviourScript.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

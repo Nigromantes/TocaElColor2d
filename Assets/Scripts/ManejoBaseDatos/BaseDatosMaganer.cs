@@ -164,13 +164,13 @@ public class BaseDatosMaganer : MonoBehaviour {
 
 
 
-    //void Start()
-    //{
-    //    //InsertarNombre("Juan");
-    //    //SetearComoInactivoTodosNOmbres();
+    void Start()
+    {
+        //InsertarNombre("Juan");
+        //SetearComoInactivoTodosNOmbres();
 
-
-    //}
+        //CargarNivel();
+    }
 
 
     public string EncontrarNombreActivo(string item, string tabla, string campo, string comparador, string dato)
@@ -294,6 +294,46 @@ public class BaseDatosMaganer : MonoBehaviour {
         }
     }
 
+    public int CargarNivel()
+    {
+        int nivelactual = 0;
+
+        AbrirDB();
+        comandosDB = conexionDB.CreateCommand();
+        string sqlQuery = "select NivelActivo from Nivel";
+        comandosDB.CommandText = sqlQuery;
+
+        leerDatos = comandosDB.ExecuteReader();
+
+        while (leerDatos.Read())
+        {
+            //Debug.Log(leerDatos.GetInt32(0));    
+            nivelactual = leerDatos.GetInt32(0);
+
+        }
+
+        leerDatos.Close();
+        leerDatos = null;
+        CerrarDB();
+
+        return nivelactual;
+
+    }
+
+    public void SeteaNivelActivo(int nivelActivo)
+    {
+        AbrirDB();
+
+        comandosDB = conexionDB.CreateCommand();
+
+
+        string sqlQuery = String.Format("UPDATE Nivel Set NivelActivo =\"{0}\"", nivelActivo);
+        comandosDB.CommandText = sqlQuery;
+
+        comandosDB.ExecuteScalar();
+
+        CerrarDB();
+    }
 
 
 

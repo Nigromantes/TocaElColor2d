@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class ControlNombresBaseDatos : MonoBehaviour,IPointerDownHandler{
+public class ControlBaseNombresDatos : MonoBehaviour,IPointerDownHandler{
 
   
    private Text textNombre;

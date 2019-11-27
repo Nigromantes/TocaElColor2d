@@ -219,7 +219,8 @@ public class ControlPanelColores : MonoBehaviour
 
     private void AjusteDeModificadorTiempo()
     {
-        switch (GameManager.instance.nivelDeJuego)
+        int nivelDeJuego = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
+        switch (nivelDeJuego)
         {
             case 0:
                 tiempoMaximoModificador = 0;
