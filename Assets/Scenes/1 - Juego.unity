@@ -1833,7 +1833,6 @@ MonoBehaviour:
   panelPreambulo: {fileID: 370619836}
   panelGameOver: {fileID: 276231922}
   imagenContadorTiempo: {fileID: 114542069}
-  nivelDeJuego: 2
 --- !u!114 &184384722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2087,7 +2086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &276231923
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5483,6 +5482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textoNivel: {fileID: 1554175526}
+  TextoRecord: {fileID: 1278538743}
 --- !u!1 &855145829
 GameObject:
   m_ObjectHideFlags: 0
@@ -10825,6 +10825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textoNivel: {fileID: 22907144}
+  TextoRecord: {fileID: 1590090697}
 --- !u!1 &1617944369
 GameObject:
   m_ObjectHideFlags: 0

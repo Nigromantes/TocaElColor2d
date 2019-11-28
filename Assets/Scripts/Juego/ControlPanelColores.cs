@@ -467,14 +467,35 @@ public class ControlPanelColores : MonoBehaviour
                 maximoPuntaje = puntos;
             }
 
+            GuardadoDePuntajeEnBaseDedatos();
             puntos = 0;
-            //AsignacionDeColorATocar();
-            
+            //AsignacionDeColorATocar();            
             GameManager.instance.CambioDeEstadoDeJuego(3);
 
         }
 
         AjusteDeTextos();
+    }
+
+    private void GuardadoDePuntajeEnBaseDedatos()
+    {
+        int nivelActual = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
+        string tablaNivel = "";
+
+        switch (nivelActual)
+        {
+            case 0: tablaNivel = "PuntajesNivelFacil";
+                break;
+            case 1:
+                tablaNivel = "PuntajesNivelMedio";
+                break;
+            case 2:
+                tablaNivel = "PuntajesNivelDificil";
+                break;
+        }
+
+        string nombre = GameManager.instance.GetComponent<BaseDatosMaganer>().EncontrarNombreActivo();
+        GameManager.instance.GetComponent<BaseDatosMaganer>().InsertarPuntos(tablaNivel, nombre,puntos);
     }
 
     private void AjusteDeTextos()

@@ -170,22 +170,25 @@ public class BaseDatosMaganer : MonoBehaviour {
         //SetearComoInactivoTodosNOmbres();
 
         //CargarNivel();
+        //EncontrarNombreActivo();
+        //ObtenerRecord();
     }
 
 
-    public string EncontrarNombreActivo(string item, string tabla, string campo, string comparador, string dato)
+    public string EncontrarNombreActivo()
     {
         string nombre = "nombre";
         rankings.Clear();
         AbrirDB();
         comandosDB = conexionDB.CreateCommand();
-         string sqlQuery = "select " + item + " from " + tabla + " where " + campo + " " + comparador + " " + dato;
+        //string sqlQuery = "select " + item + " from " + tabla + " where " + campo + " " + comparador + " " + dato;
+        string sqlQuery = "SELECT Nombre FROM Nombres WHERE activo = 1";
 
-       //ComandoWHERE("*", "albums","AlbumId","=","33");
+        //ComandoWHERE("*", "albums","AlbumId","=","33");
         //string sqlQuery = "select " + item + " from " + tabla + " where " + campo + " " + comparador + " " + dato;
 
         //string sqlQuery ="select "
-        
+
         comandosDB.CommandText = sqlQuery;
         leerDatos = comandosDB.ExecuteReader();
         while (leerDatos.Read())
@@ -205,29 +208,26 @@ public class BaseDatosMaganer : MonoBehaviour {
             //    continue;
             //}
 
-            nombre = leerDatos.GetString(1).ToString();
-            //return nombre; 
+            
+            nombre = leerDatos.GetString(0).ToString();
+            //Debug.Log(nombre);
+            
 
         }
 
-        
-
         leerDatos.Close();
         leerDatos = null;
-
         CerrarDB();
         return nombre; 
-        
-
     }
 
 
 
-    public void InsertarPuntos(string n, int s)
+    public void InsertarPuntos(string tablaNivel,string nombre, int puntaje)
     {
         AbrirDB();
         comandosDB = conexionDB.CreateCommand();
-        string sqlQuery = String.Format("insert into Ranking(Name,Score) values(\"{0}\",\"{1}\")", n, s);
+        string sqlQuery = String.Format("insert into \"" + tablaNivel + "\"(Nombre,Puntaje) values(\"{0}\",\"{1}\")", nombre, puntaje);
         comandosDB.CommandText = sqlQuery;
         comandosDB.ExecuteScalar();
         CerrarDB();
@@ -241,6 +241,34 @@ public class BaseDatosMaganer : MonoBehaviour {
         comandosDB.CommandText = sqlQuery;
         comandosDB.ExecuteScalar();
         CerrarDB();
+    }
+
+
+    public int ObtenerRecord(string tabla )
+    {
+        int puntajeAlto = 0;
+
+        rankings.Clear();
+        AbrirDB();
+        comandosDB = conexionDB.CreateCommand();
+        string sqlQuery = "SELECT puntaje FROM \"" + tabla + "\" ORDER BY puntaje ASC";
+        comandosDB.CommandText = sqlQuery;
+
+        leerDatos = comandosDB.ExecuteReader();
+        while (leerDatos.Read())
+        {
+            //rankings.Add(new Ranking(leerDatos.GetInt32(0), leerDatos.GetString(1), leerDatos.GetInt32(2),
+            //                leerDatos.GetDateTime(3)));
+          puntajeAlto =  leerDatos.GetInt32(0);
+
+        }
+        leerDatos.Close();
+        leerDatos = null;
+        CerrarDB();
+        rankings.Sort();
+
+        //Debug.Log(puntajeAlto);
+        return puntajeAlto;
     }
 
 
@@ -272,7 +300,7 @@ public class BaseDatosMaganer : MonoBehaviour {
         leerDatos.Close();
         leerDatos = null;
         CerrarDB();
-        //rankings.Sort();
+        
     }
 
     public void MostrarNombres()

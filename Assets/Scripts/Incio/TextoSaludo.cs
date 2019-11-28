@@ -31,8 +31,8 @@ public class TextoSaludo : MonoBehaviour {
     {
         textSaludo = GetComponent<TextMeshProUGUI>();
 
-        nombre =  GameManagerInicio.instance.GetComponent<BaseDatosMaganer>().EncontrarNombreActivo("*", "Nombres", "Activo", "=", "1");
-
+        // nombre =  GameManagerInicio.instance.GetComponent<BaseDatosMaganer>().EncontrarNombreActivo("*", "Nombres", "Activo", "=", "1");
+        nombre = GameManagerInicio.instance.GetComponent<BaseDatosMaganer>().EncontrarNombreActivo();
 
         if (nombre != "nombre")
         {

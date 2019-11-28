@@ -13,6 +13,8 @@ public class BotonNivel : MonoBehaviour {
     //private TextMeshProUGUI textoNivel;
     public TextMeshProUGUI textoNivel;
     private string TextoDeElNivelActual;
+    public TextMeshProUGUI TextoRecord;
+    private string TextoRecordDeNivel;
     //int nivelActual;
 
     private void Start()
@@ -26,8 +28,9 @@ public class BotonNivel : MonoBehaviour {
         //AjusteNivel(nivelActual, TextoDeElNivelActual);
         //AjusteNivel(GameManager.instance.nivelDeJuego, TextoDeElNivelActual);
         AjusteTextoInicial(TextoDeElNivelActual);
-
-        Debug.Log(nivelActual);
+        AjusteDeTextoRecord(nivelActual);
+       
+       
     }
 
 
@@ -53,6 +56,7 @@ public class BotonNivel : MonoBehaviour {
 
         TextoDeElNivelActual = DeterminarTextoActualNivel(nuevoNivel);
         AjusteNivel(nuevoNivel, TextoDeElNivelActual);
+        AjusteDeTextoRecord(nuevoNivel);
 
     }
 
@@ -64,7 +68,7 @@ public class BotonNivel : MonoBehaviour {
 
         textoNivel.text = textoNuevoNivel;
 
-        Debug.Log(nuevoNivel);
+        //Debug.Log(nuevoNivel);
                      
     }
 
@@ -98,4 +102,26 @@ public class BotonNivel : MonoBehaviour {
         return textoSegunNivel;
     }
 
+    private void AjusteDeTextoRecord(int nivelActual)
+    {
+        string tablaDePuntajesNivel = "";
+
+        switch (nivelActual)
+        {
+            case 0:
+                tablaDePuntajesNivel = "PuntajesNivelFacil";
+                break;
+            case 1:
+                tablaDePuntajesNivel = "PuntajesNivelMedio";
+                break;
+            case 2:
+                tablaDePuntajesNivel = "PuntajesNivelDificil";
+                break;
+
+        }
+
+        int record = GameManager.instance.GetComponent<BaseDatosMaganer>().ObtenerRecord(tablaDePuntajesNivel);
+        TextoRecord.text = "Record: " + record;
+       
+    }
 }
