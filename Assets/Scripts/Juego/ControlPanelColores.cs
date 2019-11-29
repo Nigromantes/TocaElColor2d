@@ -168,7 +168,7 @@ public class ControlPanelColores : MonoBehaviour
     public int numeroDeCuadrosQueCambian3Totales;
 
     private int puntos;
-    private int maximoPuntaje;
+    //private int maximoPuntaje;
     private int colorATocar;
 
     public Sprite sprite_Azul;
@@ -180,6 +180,8 @@ public class ControlPanelColores : MonoBehaviour
     private float tiempoMaximoJuego;
 
     public bool conteoActivo = false;
+
+    public GameObject botonNivel;
 
 
     public float TiempoInicial {
@@ -212,7 +214,7 @@ public class ControlPanelColores : MonoBehaviour
         AjusteDeModificadorTiempo();
 
         puntos = 0;
-        maximoPuntaje = 0;
+        //maximoPuntaje = 0;
         ReiniciarTiempoMaximo();
 
     }
@@ -244,6 +246,8 @@ public class ControlPanelColores : MonoBehaviour
 
     void Start()
     {
+        
+
         DefinirVariables();
         //AsignacionDeColorATocar();
         AsignarColoresAlInicio();
@@ -264,7 +268,7 @@ public class ControlPanelColores : MonoBehaviour
             if (tiempoMaximoJuego < 0)
             {
                 //Debug.Log("Se acabó el tiempo");
-                GameManager.instance.CambioDeEstadoDeJuego(3);
+                FinDelJuego();
                 
 
             }
@@ -461,27 +465,36 @@ public class ControlPanelColores : MonoBehaviour
         }
         else
         {
+            //if (puntos > maximoPuntaje)
+            //{
+            //    maximoPuntaje = puntos;
+            //}
 
-            if (puntos > maximoPuntaje)
-            {
-                maximoPuntaje = puntos;
-            }
-
-            GuardadoDePuntajeEnBaseDedatos();
-            puntos = 0;
-            //AsignacionDeColorATocar();            
-            GameManager.instance.CambioDeEstadoDeJuego(3);
-
+            FinDelJuego();
         }
 
-        AjusteDeTextos();
+        AjusteDeTextoPuntajeActivo();
+    }
+
+    private void FinDelJuego()
+    {
+        int nivelActual = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
+        GuardadoDePuntajeEnBaseDedatos();
+        AjusteDeTextoPuntaFinal();
+        puntos = 0;
+        //AsignacionDeColorATocar();            
+        GameManager.instance.CambioDeEstadoDeJuego(3);        
+        botonNivel.GetComponent<BotonNivel>().AjusteDeTextoRecord(nivelActual); ;     
     }
 
     private void GuardadoDePuntajeEnBaseDedatos()
     {
-        int nivelActual = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
-        string tablaNivel = "";
+        //Debug.Log("Se ejecuta el método guardado de puntaje en base de datos");
 
+        int nivelActual = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
+        string nombre = GameManager.instance.GetComponent<BaseDatosMaganer>().EncontrarNombreActivo();
+        string tablaNivel = "";
+        
         switch (nivelActual)
         {
             case 0: tablaNivel = "PuntajesNivelFacil";
@@ -493,15 +506,23 @@ public class ControlPanelColores : MonoBehaviour
                 tablaNivel = "PuntajesNivelDificil";
                 break;
         }
-
-        string nombre = GameManager.instance.GetComponent<BaseDatosMaganer>().EncontrarNombreActivo();
+        //Debug.Log(tablaNivel);
+        
         GameManager.instance.GetComponent<BaseDatosMaganer>().InsertarPuntos(tablaNivel, nombre,puntos);
     }
 
-    private void AjusteDeTextos()
+    private void AjusteDeTextoPuntajeActivo()
     {
         GameManager.instance.textoDePuntos.text = "Puntos: " + puntos;
-        //GameManager.instance.textoPuntajeFinal.text = "Puntos: " + puntos;
-       GameManager.instance.textoDeMaximoPuntos.text = "Máx P: " + maximoPuntaje;
+      
+       
+    }
+
+    private void AjusteDeTextoPuntaFinal()
+    {
+        //Debug.Log("Se ejecuta el ajuste de texto puntaje final");
+        
+        GameManager.instance.textoPuntajeFinal.text = "Puntos: " + puntos;
+
     }
 }

@@ -102,7 +102,7 @@ public class BotonNivel : MonoBehaviour {
         return textoSegunNivel;
     }
 
-    private void AjusteDeTextoRecord(int nivelActual)
+    public void AjusteDeTextoRecord(int nivelActual)
     {
         string tablaDePuntajesNivel = "";
 

@@ -185,10 +185,6 @@ public class BaseDatosMaganer : MonoBehaviour {
         string sqlQuery = "SELECT Nombre FROM Nombres WHERE activo = 1";
 
         //ComandoWHERE("*", "albums","AlbumId","=","33");
-        //string sqlQuery = "select " + item + " from " + tabla + " where " + campo + " " + comparador + " " + dato;
-
-        //string sqlQuery ="select "
-
         comandosDB.CommandText = sqlQuery;
         leerDatos = comandosDB.ExecuteReader();
         while (leerDatos.Read())
@@ -227,7 +223,8 @@ public class BaseDatosMaganer : MonoBehaviour {
     {
         AbrirDB();
         comandosDB = conexionDB.CreateCommand();
-        string sqlQuery = String.Format("insert into \"" + tablaNivel + "\"(Nombre,Puntaje) values(\"{0}\",\"{1}\")", nombre, puntaje);
+        string sqlQuery = String.Format("INSERT INTO "+ tablaNivel +"(Nombre,Puntaje) values(\"{0}\",\"{1}\")", nombre, puntaje);
+        //string sqlQuery = String.Format("INSERT into PuntajesNivelFacil (Nombre,Puntaje) values(\"{0}\",\"{1}\")", nombre, puntaje);
         comandosDB.CommandText = sqlQuery;
         comandosDB.ExecuteScalar();
         CerrarDB();
@@ -265,7 +262,7 @@ public class BaseDatosMaganer : MonoBehaviour {
         leerDatos.Close();
         leerDatos = null;
         CerrarDB();
-        rankings.Sort();
+        //rankings.Sort();
 
         //Debug.Log(puntajeAlto);
         return puntajeAlto;

@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour {
 
     public TextMeshProUGUI textoPuntajeFinal;
 
-    public TextMeshProUGUI textoDeMaximoPuntos;
+    //public TextMeshProUGUI textoDeMaximoPuntos;
+   // public TextMeshProUGUI textoPuntajeFinal;
 
     public GameObject panelBloqueo;
     //public GameObject panelIntermedio;
