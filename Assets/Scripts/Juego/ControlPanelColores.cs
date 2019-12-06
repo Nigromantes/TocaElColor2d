@@ -481,10 +481,12 @@ public class ControlPanelColores : MonoBehaviour
         int nivelActual = GameManager.instance.GetComponent<BaseDatosMaganer>().CargarNivel();
         GuardadoDePuntajeEnBaseDedatos();
         AjusteDeTextoPuntaFinal();
+        GameManager.instance.GetComponent<TextoResultado>().DefinirTextoResultado(puntos);
         puntos = 0;
         //AsignacionDeColorATocar();            
         GameManager.instance.CambioDeEstadoDeJuego(3);        
-        botonNivel.GetComponent<BotonNivel>().AjusteDeTextoRecord(nivelActual); ;     
+        botonNivel.GetComponent<BotonNivel>().AjusteDeTextoRecord(nivelActual);
+            
     }
 
     private void GuardadoDePuntajeEnBaseDedatos()

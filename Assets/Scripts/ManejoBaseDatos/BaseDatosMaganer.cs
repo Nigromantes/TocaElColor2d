@@ -15,7 +15,11 @@ public class BaseDatosMaganer : MonoBehaviour {
     //public int limiteRanking;
 
     public GameObject nombrePrefab;
-    public Transform panelNombres; 
+    public Transform panelNombres;
+
+    public GameObject puntajeEnTablaPrefab;
+    public Transform panelTablaPuntajes;
+
 
     IDbConnection conexionDB;
     IDbCommand comandosDB;
@@ -25,8 +29,12 @@ public class BaseDatosMaganer : MonoBehaviour {
 
     private List<NombreObjeto> nombres = new List<NombreObjeto>();
 
-    private List<Ranking> rankings = new List<Ranking>();
+   // private List<Ranking> rankings = new List<Ranking>();
 
+    private List<PuntajeTablaObjeto> puntajesTabla = new List<PuntajeTablaObjeto>();
+
+    private int maximoDepuestos = 10;
+    
     //Use this for initialization
 
     //void Start ()
@@ -64,47 +72,28 @@ public class BaseDatosMaganer : MonoBehaviour {
         conexionDB.Open();
     }
 
-    void ObtenerNombre()
-    {
-        rankings.Clear();
-        AbrirDB();
-        comandosDB = conexionDB.CreateCommand();
-        string sqlQuery = "select * from Ranking";
-        comandosDB.CommandText = sqlQuery;
+    //void ObtenerRanking()
+    //{
+    //    rankings.Clear();
+    //    AbrirDB();
+    //    comandosDB = conexionDB.CreateCommand();
+    //    string sqlQuery = "select * from Ranking";
+    //    comandosDB.CommandText = sqlQuery;
 
-        leerDatos = comandosDB.ExecuteReader();
-        while (leerDatos.Read())
-        {
-            rankings.Add(new Ranking(leerDatos.GetInt32(0), leerDatos.GetString(1), leerDatos.GetInt32(2),
-                            leerDatos.GetDateTime(3)));
-        }
-        leerDatos.Close();
-        leerDatos = null;
-        CerrarDB();
-        rankings.Sort();
-    }
+    //    leerDatos = comandosDB.ExecuteReader();
+    //    while (leerDatos.Read())
+    //    {
+    //        rankings.Add(new Ranking(leerDatos.GetInt32(0), leerDatos.GetString(1), leerDatos.GetInt32(2),
+    //                        leerDatos.GetDateTime(3)));
+    //    }
+    //    leerDatos.Close();
+    //    leerDatos = null;
+    //    CerrarDB();
+    //    rankings.Sort();
+    //}
 
 
-    void ObtenerRanking()
-    {
-        rankings.Clear();
-        AbrirDB();
-        comandosDB = conexionDB.CreateCommand();
-        string sqlQuery = "select * from Ranking";
-        comandosDB.CommandText = sqlQuery;
 
-        leerDatos = comandosDB.ExecuteReader();
-        while (leerDatos.Read())
-        {
-            rankings.Add(new Ranking(leerDatos.GetInt32(0), leerDatos.GetString(1), leerDatos.GetInt32(2),
-                            leerDatos.GetDateTime(3)));
-        }
-        leerDatos.Close();
-        leerDatos = null;
-        CerrarDB();
-        rankings.Sort();
-    }
-    
     public void InsertarNombre(string nombre)
     {
         AbrirDB();
@@ -178,7 +167,7 @@ public class BaseDatosMaganer : MonoBehaviour {
     public string EncontrarNombreActivo()
     {
         string nombre = "nombre";
-        rankings.Clear();
+        nombres.Clear();
         AbrirDB();
         comandosDB = conexionDB.CreateCommand();
         //string sqlQuery = "select " + item + " from " + tabla + " where " + campo + " " + comparador + " " + dato;
@@ -245,7 +234,7 @@ public class BaseDatosMaganer : MonoBehaviour {
     {
         int puntajeAlto = 0;
 
-        rankings.Clear();
+        //rankings.Clear();
         AbrirDB();
         comandosDB = conexionDB.CreateCommand();
         string sqlQuery = "SELECT puntaje FROM \"" + tabla + "\" ORDER BY puntaje ASC";
@@ -321,7 +310,7 @@ public class BaseDatosMaganer : MonoBehaviour {
 
     public int CargarNivel()
     {
-        int nivelactual = 0;
+        int nivelActual = 0;
 
         AbrirDB();
         comandosDB = conexionDB.CreateCommand();
@@ -333,7 +322,7 @@ public class BaseDatosMaganer : MonoBehaviour {
         while (leerDatos.Read())
         {
             //Debug.Log(leerDatos.GetInt32(0));    
-            nivelactual = leerDatos.GetInt32(0);
+            nivelActual = leerDatos.GetInt32(0);
 
         }
 
@@ -341,7 +330,7 @@ public class BaseDatosMaganer : MonoBehaviour {
         leerDatos = null;
         CerrarDB();
 
-        return nivelactual;
+        return nivelActual;
 
     }
 
@@ -360,26 +349,123 @@ public class BaseDatosMaganer : MonoBehaviour {
         CerrarDB();
     }
 
+    void ObtenerTablaPuntajes(string tabla)
+    {
+
+        puntajesTabla.Clear();
+        AbrirDB();
+        comandosDB = conexionDB.CreateCommand();
+        string sqlQuery = "select * from \"" + tabla + "\"";
+        comandosDB.CommandText = sqlQuery;
+
+        leerDatos = comandosDB.ExecuteReader();
+        while (leerDatos.Read())
+        {
+            //puntajesTabla.Add(new PuntajeTablaObjeto(leerDatos.GetInt32(0),leerDatos.GetString(1), leerDatos.GetInt32(2),
+            //                leerDatos.GetDateTime(3)));
+
+            puntajesTabla.Add(new PuntajeTablaObjeto(leerDatos.GetInt32(0),leerDatos.GetString(1), leerDatos.GetInt32(2)));
+        }
+        leerDatos.Close();
+        leerDatos = null;
+        CerrarDB();
+        puntajesTabla.Sort();
+    }
+        
+    public void MostrarPuestosTablaDePuntajes()
+    {
+        CargarNivelYPuntajes();
+        for (int i = 0; i < maximoDepuestos; i++)
+        {
+            if (i < puntajesTabla.Count)
+            {
+                GameObject prefabTemporal = Instantiate(puntajeEnTablaPrefab);
+                prefabTemporal.transform.SetParent(panelTablaPuntajes);
+                prefabTemporal.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
+                PuntajeTablaObjeto puntajeTablaTemporal = puntajesTabla[i];
+                prefabTemporal.GetComponent<PuntajeTableScript>().AsignarInformacion("#" + (i + 1).ToString(),
+                                                                       puntajeTablaTemporal.Nombre, puntajeTablaTemporal.Puntaje.ToString());
+            }
+
+        }
+    }
+
+    private void CargarNivelYPuntajes()
+    {
+        int nivelActual = CargarNivel();
+
+        string tablaDePuntajesNivel = "";
+
+        switch (nivelActual)
+        {
+            case 0:
+                tablaDePuntajesNivel = "PuntajesNivelFacil";
+                break;
+            case 1:
+                tablaDePuntajesNivel = "PuntajesNivelMedio";
+                break;
+            case 2:
+                tablaDePuntajesNivel = "PuntajesNivelDificil";
+                break;
+
+        }       
+
+        ObtenerTablaPuntajes(tablaDePuntajesNivel);
+    }
+
+  
+
+    public void BorrarPuntosExtra()
+    {
+        int nivelActual = CargarNivel();
+
+        string tablaDePuntajesNivel = "";
+
+        switch (nivelActual)
+        {
+            case 0:
+                tablaDePuntajesNivel = "PuntajesNivelFacil";
+                break;
+            case 1:
+                tablaDePuntajesNivel = "PuntajesNivelMedio";
+                break;
+            case 2:
+                tablaDePuntajesNivel = "PuntajesNivelDificil";
+                break;
+
+        }
+
+        ObtenerTablaPuntajes(tablaDePuntajesNivel);
+
+
+        // COmpruebo que el ranking sea mas grande que el límte
+        if (maximoDepuestos <= puntajesTabla.Count)
+        {
+            // invierto el ranking
+            // Obtengo diferencia entre el ranking y el limite
+            puntajesTabla.Reverse();
+            int diferencia = puntajesTabla.Count - maximoDepuestos;
+            // Abro DB
+            //Creo commando
+            // Bucle con en la diferencia
+            AbrirDB();
+            comandosDB = conexionDB.CreateCommand();
 
 
 
-    //public void MostrarRanking()
-    //{
-    //    ObtenerRanking();
-    //    for (int i = 0; i < topRank; i++)
-    //    {
-    //        if (i < rankings.Count)
-    //        {
-    //            GameObject tempPrefab = Instantiate(puntosPrefab);
-    //            tempPrefab.transform.SetParent(puntosPadre);
-    //            tempPrefab.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
-    //            Ranking rankTemp = rankings[i];
-    //            tempPrefab.GetComponent<RankingScript>().PonerPuntos("#" + (i + 1).ToString(),
-    //                                                                   rankTemp.Name, rankTemp.Score.ToString());
-    //        }
+            for (int i = 0; i < diferencia; i++)
+            {
+                // borro por ID en la posición del ranking
+                string sqlQuery = "DELETE from \"" + tablaDePuntajesNivel + "\" where Indice = \"" + puntajesTabla[i].Indice + "\"";
+                comandosDB.CommandText = sqlQuery;
+                comandosDB.ExecuteScalar();
+            }
+            // cierro DB
+            CerrarDB();
+        }
+    }
 
-    //    }
-    //}
+
 
     //public void BorrarPuntosExtra()
     //{

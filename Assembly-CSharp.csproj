@@ -74,8 +74,14 @@
      <Compile Include="Assets\Scripts\Juego\ControlImagentiempo.cs" />
      <Compile Include="Assets\Scripts\Juego\ControlPanelColores.cs" />
      <Compile Include="Assets\Scripts\Juego\CuadroColor.cs" />
+     <Compile Include="Assets\Scripts\Juego\DeterminarTexto.cs" />
+     <Compile Include="Assets\Scripts\Juego\TextoResultado.cs" />
      <Compile Include="Assets\Scripts\ManejoBaseDatos\BaseDatosMaganer.cs" />
      <Compile Include="Assets\Scripts\ManejoEscena.cs" />
+     <Compile Include="Assets\Scripts\Tabla Puntajes\ControlTextoNivel.cs" />
+     <Compile Include="Assets\Scripts\Tabla Puntajes\PanelTablaPuntajes.cs" />
+     <Compile Include="Assets\Scripts\Tabla Puntajes\PuntajeTablaObjeto.cs" />
+     <Compile Include="Assets\Scripts\Tabla Puntajes\PuntajeTableScript.cs" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />

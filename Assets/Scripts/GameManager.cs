@@ -47,15 +47,17 @@ public class GameManager : MonoBehaviour {
     public GameObject imagenContadorTiempo;
     //public Sprite spriteBomba;
     //public Sprite spriteBonus;
-    
+
     //public int nivelDeJuego;
+   // private TextoResultado textoResultado;
 
 
 
     private void Awake()
     {
 
-        instance = this; 
+        instance = this;
+        //textoResultado = GetComponent<TextoResultado>(); 
 
     }
 
@@ -121,7 +123,7 @@ public class GameManager : MonoBehaviour {
         panelControlDeColores.GetComponent<ControlPanelColores>().conteoActivo = false;
         panelGameOver.SetActive(true);
         panelBloqueo.SetActive(true);
-
+      
 
     }
 

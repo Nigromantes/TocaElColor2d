@@ -78,7 +78,7 @@ public class BotonNivel : MonoBehaviour {
         textoNivel.text = TextoNivelInicial;
     }
 
-    private string DeterminarTextoActualNivel(int nivelActual)
+  protected string DeterminarTextoActualNivel(int nivelActual)
     {
         string textoSegunNivel ="";
 
